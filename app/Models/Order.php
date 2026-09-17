@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Order extends Model
+{
+    protected $fillable = [
+        'user_id',
+        'order_number',
+        'payment_method_id',
+        'name',
+        'email',
+        'phone',
+        'address',
+        'city',
+        'payment_receipt',
+        'payment_receipt_public_id',
+        'payment_status',
+        'subtotal',
+        'shipping_fee',
+        'total',
+        'status',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function paymentMethod()
+    {
+        return $this->belongsTo(PaymentMethod::class);
+    }
+}
