@@ -21,7 +21,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('payment_methods', function (Blueprint $table) {
-            $table->dropColumn('image_public_id');
+            $table->dropColumn('logo_public_id');
         });
     }
 };

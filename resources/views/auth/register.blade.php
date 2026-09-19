@@ -4,7 +4,7 @@
     <div class="flex items-center justify-center min-h-screen">
         <div class="flex flex-col w-1/4 pt-10 pb-20 bg-white shadow px-7">
             <div class="mx-auto">
-                <a href="" class="text-2xl font-gugi"
+                <a href="{{ route('user#home') }}" class="text-2xl font-gugi"
                     >tech<span class="font-bold text-lime-400">V</span>erse</a
                 >
             </div>
@@ -71,19 +71,14 @@
                                 class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 focus:outline-none"
                             >
                                 <x-heroicon-o-eye id="eyeIcon" class="text-gray-600 size-5" />
-                                <x-heroicon-o-eye-slash
-                                    id="eyeOffIcon"
-                                    class="hidden text-gray-600 size-5"
-                                />
+                                <x-heroicon-o-eye-slash id="eyeOffIcon" class="hidden text-gray-600 size-5" />
                             </button>
                         </div>
                         @error ('password')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
 
-                        <label for="repeatPassword" class="mt-3 mb-1 text-sm"
-                            >Repeat Password</label
-                        >
+                        <label for="repeatPassword" class="mt-3 mb-1 text-sm">Repeat Password</label>
                         <div class="relative">
                             <input
                                 id="repeatPassword"
@@ -98,10 +93,7 @@
                                 class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 focus:outline-none"
                             >
                                 <x-heroicon-o-eye id="repeatEyeIcon" class="text-gray-600 size-5" />
-                                <x-heroicon-o-eye-slash
-                                    id="repeatEyeOffIcon"
-                                    class="hidden text-gray-600 size-5"
-                                />
+                                <x-heroicon-o-eye-slash id="repeatEyeOffIcon" class="hidden text-gray-600 size-5" />
                             </button>
                         </div>
                         @error ('password_confirmation')
@@ -109,10 +101,7 @@
                         @enderror
                     </div>
 
-                    <button
-                        type="submit"
-                        class="w-full px-4 py-2.5 mt-5 text-sm text-black rounded-sm bg-lime-400"
-                    >
+                    <button type="submit" class="w-full px-4 py-2.5 mt-5 text-sm text-black rounded-sm bg-lime-400">
                         Create Account
                     </button>
                 </form>

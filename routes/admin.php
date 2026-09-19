@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminManagementController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CustomerContactController;
 use App\Http\Controllers\Admin\OrderManagementController;
 use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\ProductController;
@@ -21,6 +22,10 @@ Route::middleware(['auth', 'superAdminMiddleware'])
         Route::post('/admin-management/add-admin', [AdminManagementController::class, 'addAdmin'])->name(
             'admin#addAdmin',
         );
+
+        Route::get('/admin/edit/{id}', [AdminManagementController::class, 'editAdmin'])->name('admin#editAdmin');
+
+        Route::put('/admin/update/{id}', [AdminManagementController::class, 'updateAdmin'])->name('admin#updateAdmin');
 
         Route::post('/admin/delete/{id}', [AdminManagementController::class, 'deleteAdmin'])->name('admin#deleteAdmin');
     });
@@ -100,4 +105,19 @@ Route::middleware(['auth', 'adminMiddleware'])
         Route::patch('/payment/toggle/{id}', [PaymentMethodController::class, 'toggleStatus'])->name(
             'admin#togglePayment',
         );
+
+        // contact
+        Route::get('/admin/customerContact', [CustomerContactController::class, 'customerContact'])->name(
+            'admin#customerContact',
+        );
+
+        Route::get('/admin/customerContact/contactDetails/{id}', [
+            CustomerContactController::class,
+            'contactDetails',
+        ])->name('admin#contactDetails');
+
+        Route::delete('/admin/deleteCustomerMessage/{id}', [
+            CustomerContactController::class,
+            'deleteCustomerMessage',
+        ])->name('admin#deleteCustomerMessage');
     });

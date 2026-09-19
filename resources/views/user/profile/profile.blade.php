@@ -237,7 +237,7 @@
                     icon: 'success',
                     title: 'Profile Updated',
                     text: @json (session('success')),
-                    confirmButtonColor: '#84cc16',
+                    confirmButtonColor: '#a3e635',
                     confirmButtonText: 'Done',
                     customClass: {
                         popup: 'rounded-2xl',

@@ -82,13 +82,18 @@
 
                                     <div class="px-6 py-3">
                                         <div class="font-medium text-gray-800">
-                                            @if ($product->variants->count() === 1)
-                                                {{ number_format($product->variants->first()->price) }}
-                                                <span class="text-xs font-normal"> MMK </span>
+                                            @php
+                                                $minPrice = $product->variants->min('price');
+                                                $maxPrice = $product->variants->max('price');
+                                            @endphp
+
+                                            @if ($minPrice === $maxPrice)
+                                                {{ number_format($minPrice) }}
                                             @else
-                                                {{ number_format($product->variants->min('price')) }} - {{ number_format($product->variants->max('price')) }}
-                                                <span class="text-xs font-normal"> MMK </span>
+                                                {{ number_format($minPrice) }} - {{ number_format($maxPrice) }}
                                             @endif
+
+                                            <span class="text-xs font-normal">MMK</span>
                                         </div>
                                     </div>
 
@@ -187,6 +192,7 @@
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Yes, delete it!',
+                confirmButtonColor: '#a3e635',
                 cancelButtonText: 'Cancel',
             }).then((result) => {
                 if (result.isConfirmed) {

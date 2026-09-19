@@ -1,33 +1,6 @@
 @extends ('layouts.admin.app')
 
 @section ('content')
-    {{-- <h1 class="text-2xl font-bold">Admin Management</h1>
-
-    <a href="" class="px-4 py-2 text-white rounded bg-lime-500"> Add Admin </a>
-
-    @foreach ($admins as $admin)
-        <div class="flex items-center justify-between p-4 mt-3 bg-white rounded shadow">
-            <div>
-                <h2 class="font-semibold">{{ $admin->name }}</h2>
-
-                <p class="text-gray-500">{{ $admin->email }}</p>
-            </div>
-
-            <div class="flex gap-2">
-                <a href="" class="px-3 py-2 text-white bg-blue-500 rounded"> Edit </a>
-
-                <form action="" method="POST">
-                    @csrf
-                    @method ('DELETE')
-
-                    <button type="submit" class="px-3 py-2 text-white bg-red-500 rounded">
-                        Delete
-                    </button>
-                </form>
-            </div>
-        </div>
-    @endforeach --}}
-
     <div class="px-10 py-7">
         <div class="flex items-center justify-between pb-3">
             <h1 class="text-2xl font-medium text-gray-800">Admin List</h1>
@@ -52,25 +25,25 @@
                 <div>
                     @if ($adminCount != 0)
                         @foreach ($admins as $admin)
-                            <div
-                                class="grid items-center grid-cols-3 px-8 text-sm font-medium border-b"
-                            >
+                            <div class="grid items-center grid-cols-3 px-8 text-sm font-medium border-b">
                                 <div class="px-6 py-3">{{ $admin->name }}</div>
                                 <div class="px-6 py-3">{{ $admin->role }}</div>
                                 <div class="px-6 py-3">
-                                    <button
-                                        {{-- onclick="openEditModal('{{ $item->name }}', '{{ route('category#update', $item->id) }}')" --}}
-                                        class="text-lg text-blue-600"
-                                    >
-                                        <i class="fa-regular fa-pen-to-square"></i>
-                                    </button>
+                                    @if (Auth::user()->role === 'superadmin')
+                                        <a
+                                            href="{{ route('admin#editAdmin', $admin->id) }}"
+                                            class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-700 transition bg-gray-100 rounded-lg hover:bg-lime-100 hover:text-gray-800"
+                                        >
+                                            <x-feathericon-edit class="w-5 h-5" />
+                                        </a>
+                                    @endif
 
                                     @if ($admin->role !== 'superadmin')
                                         <button
                                             onclick="confirmDelete({{ $admin->id }})"
-                                            class="text-lg text-red-600"
+                                            class="inline-flex items-center justify-center text-red-600 transition bg-red-100 rounded-lg w-9 h-9 hover:bg-red-200"
                                         >
-                                            <i class="fa-regular fa-trash-can"></i>
+                                            <x-heroicon-o-trash class="w-5 h-5" />
                                         </button>
                                     @endif
 
@@ -115,6 +88,7 @@
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Yes, delete it!',
+                confirmButtonColor: '#a3e635',
                 cancelButtonText: 'Cancel',
             }).then((result) => {
                 if (result.isConfirmed) {

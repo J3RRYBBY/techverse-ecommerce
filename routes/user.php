@@ -3,6 +3,7 @@
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\CategoryController;
 use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\User\ContactController;
 use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\ProfileController;
@@ -17,13 +18,12 @@ Route::get('/product/details/{id}', [ProductController::class, 'productDetails']
 
 Route::get('/category', [CategoryController::class, 'category'])->name('user#category');
 
+// contact
+Route::get('/contact', [ContactController::class, 'contact'])->name('user#contact');
+
+Route::post('/contact', [ContactController::class, 'contactStore'])->name('user#contactStore');
+
 Route::middleware(['auth', 'userMiddleware'])->group(function () {
-    // Route::get('/shop', [ProductController::class, 'productList'])->name('user#productList');
-
-    // Route::get('/product/details/{id}', [ProductController::class, 'productDetails'])->name(
-    //     'user#productDetails',
-    // );
-
     // review
     Route::post('/product/{product}/feedback', [RatingController::class, 'feedback'])->name('user#feedback');
 

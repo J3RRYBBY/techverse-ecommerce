@@ -1,12 +1,12 @@
 @extends ('layouts.user.app')
 
 @section ('content')
-    <div class="w-[70%] mx-auto pb-20 mt-10">
-        <h1 class="text-3xl font-medium">Checkout</h1>
+    <div class="w-[90%] mx-auto pb-20 mt-6 sm:w-[85%] sm:mt-8 lg:w-[70%] lg:mt-10">
+        <h1 class="text-2xl font-medium sm:text-3xl">Checkout</h1>
 
-        <div class="grid grid-cols-3 gap-10 mt-6">
+        <div class="grid grid-cols-1 gap-8 mt-6 lg:grid-cols-3 lg:gap-10">
             {{-- LEFT SIDE --}}
-            <div class="col-span-2">
+            <div class="lg:col-span-2">
                 <form action="{{ route('user#placeOrder') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
@@ -26,7 +26,7 @@
                             />
                         </div>
 
-                        <div class="flex items-center justify-between gap-5">
+                        <div class="flex flex-col items-center justify-between gap-0 sm:flex-row sm:gap-5">
                             <div class="w-full mt-5">
                                 <label class="block text-sm text-black/50"> Email </label>
 
@@ -51,8 +51,8 @@
                             </div>
                         </div>
 
-                        <div class="flex items-center justify-between gap-5">
-                            <div class="w-2/3 mt-5">
+                        <div class="flex flex-col items-center justify-between gap-0 sm:flex-row sm:gap-5">
+                            <div class="w-full mt-5 sm:w-2/3">
                                 <label class="block text-sm text-black/50"> Address </label>
 
                                 <input
@@ -63,7 +63,7 @@
                                 />
                             </div>
 
-                            <div class="w-1/3 mt-5">
+                            <div class="w-full mt-5 sm:w-1/3">
                                 <label class="block text-sm text-black/50"> City </label>
 
                                 <input
@@ -80,7 +80,7 @@
                     <div class="mt-10">
                         <h2 class="text-lg">Payment Method</h2>
 
-                        <div class="grid grid-cols-4 gap-5 mt-5">
+                        <div class="grid grid-cols-2 gap-3 mt-5 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 lg:gap-5">
                             @foreach ($paymentMethods as $paymentMethod)
                                 <label
                                     class="cursor-pointer payment-method"
@@ -132,13 +132,13 @@
                             <!-- Upload / Preview Container -->
                             <div
                                 id="receipt-container"
-                                class="relative flex flex-col items-center justify-center w-1/2 mt-5 overflow-hidden transition duration-200 border rounded-lg h-96"
+                                class="relative flex flex-col items-center justify-center w-full mt-5 overflow-hidden transition duration-200 border rounded-lg h-72 sm:w-3/4 sm:h-80 lg:w-1/2 lg:h-96"
                             >
                                 <!-- Upload UI -->
                                 <label
                                     id="receipt-upload"
                                     for="payment_receipt"
-                                    class="flex flex-col items-center justify-center w-full h-full cursor-pointer"
+                                    class="flex flex-col items-center justify-center w-full h-full px-4 text-center cursor-pointer"
                                 >
                                     <i class="text-3xl text-gray-400 fa-solid fa-image"></i>
 
@@ -199,15 +199,15 @@
             </div>
 
             {{-- RIGHT SIDE --}}
-            <div>
-                <div class="p-6 border">
+            <div class="lg:col-span-1">
+                <div class="p-4 border sm:p-6">
                     <h2 class="text-lg font-medium">Order Summary</h2>
 
                     <div class="mt-5">
                         @foreach ($cart as $item)
-                            <div class="flex gap-4 py-4 border-b">
+                            <div class="flex gap-3 py-4 border-b sm:gap-4">
                                 {{-- Product Image --}}
-                                <div class="w-20 h-20 shrink-0">
+                                <div class="w-16 h-16 shrink-0 sm:w-20 sm:h-20">
                                     @if ($item->variant->images->first()?->image)
                                         <img
                                             src="{{ $item->variant->images->first()->image }}"
@@ -224,8 +224,8 @@
                                 </div>
 
                                 {{-- Product Information --}}
-                                <div class="flex-1">
-                                    <h3 class="text-sm font-medium">{{ $item->variant->product->name }}</h3>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-sm font-medium truncate">{{ $item->variant->product->name }}</h3>
 
                                     <p class="mt-1 text-xs text-black/50">
                                         {{ $item->variant->capacity }} / {{ $item->variant->color }}
@@ -233,32 +233,34 @@
 
                                     {{-- <p class="mt-2 text-sm">{{ number_format($item->variant->price) }} MMK</p> --}}
 
-                                    <p class="mt-5 text-xs">Qty: {{ $item->quantity }}</p>
+                                    <p class="mt-3 text-xs sm:mt-5">Qty: {{ $item->quantity }}</p>
                                 </div>
 
                                 {{-- Item Total --}}
-                                <div class="text-sm font-medium">{{ number_format($item->variant->price) }} MMK</div>
+                                <div class="text-xs font-medium whitespace-nowrap sm:text-sm">
+                                    {{ number_format($item->variant->price) }} MMK
+                                </div>
                             </div>
                         @endforeach
                     </div>
 
                     <div class="mt-6 space-y-3">
-                        <div class="flex justify-between">
+                        <div class="flex justify-between gap-4">
                             <span class="text-sm text-black/60"> Subtotal </span>
 
-                            <span class="text-sm font-medium"> {{ number_format($subtotal) }} MMK </span>
+                            <span class="text-sm font-medium text-right"> {{ number_format($subtotal) }} MMK </span>
                         </div>
 
-                        <div class="flex justify-between">
+                        <div class="flex justify-between gap-4">
                             <span class="text-sm text-black/60"> Shipping </span>
 
-                            <span class="text-sm font-medium"> {{ number_format($shippingFee) }} MMK </span>
+                            <span class="text-sm font-medium text-right"> {{ number_format($shippingFee) }} MMK </span>
                         </div>
 
-                        <div class="flex justify-between pt-4 font-medium border-t">
+                        <div class="flex justify-between gap-4 pt-4 font-medium border-t">
                             <span> Total </span>
 
-                            <span> {{ number_format($total) }} MMK </span>
+                            <span class="text-right"> {{ number_format($total) }} MMK </span>
                         </div>
                     </div>
                 </div>

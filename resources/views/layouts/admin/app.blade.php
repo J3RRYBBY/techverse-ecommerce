@@ -21,8 +21,8 @@
                             >tech<span class="font-bold text-lime-400">V</span>erse</a
                         >
                         <button id="toggle-btn" class="p-5 cursor-pointer">
-                            <x-heroicon-o-chevron-left id="toggle-close-icon" class="w-5 h-5" />
-                            <x-heroicon-o-chevron-right id="toggle-open-icon" class="hidden w-5 h-5" />
+                            <x-lucide-sidebar-close id="toggle-close-icon" class="w-5 h-5" />
+                            <x-lucide-sidebar-open id="toggle-open-icon" class="hidden w-5 h-5" />
                         </button>
                     </div>
 
@@ -68,6 +68,13 @@
                         >
                             <x-heroicon-o-clipboard-document-list class="w-6 h-6" />
                             <span class="truncate sidebar-text">Order Board</span>
+                        </a>
+                        <a
+                            href="{{ route('admin#customerContact') }}"
+                            class="flex items-center px-6 py-3 space-x-4 transition-colors rounded-lg text-black/70"
+                        >
+                            <x-heroicon-o-user class="w-6 h-6" />
+                            <span class="truncate sidebar-text">Customer Contact</span>
                         </a>
                     </nav>
                 </div>

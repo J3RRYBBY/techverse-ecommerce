@@ -4,7 +4,7 @@
     <div class="flex items-center justify-center min-h-screen">
         <div class="flex flex-col w-1/4 pt-10 pb-20 bg-white shadow px-7">
             <div class="mx-auto">
-                <a href="" class="text-2xl font-gugi"
+                <a href="{{ route('user#home') }}" class="text-2xl font-gugi"
                     >tech<span class="font-bold text-lime-400">V</span>erse</a
                 >
             </div>
@@ -46,10 +46,7 @@
                                 class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 focus:outline-none"
                             >
                                 <x-heroicon-o-eye id="eyeIcon" class="text-gray-600 size-5" />
-                                <x-heroicon-o-eye-slash
-                                    id="eyeOffIcon"
-                                    class="hidden text-gray-600 size-5"
-                                />
+                                <x-heroicon-o-eye-slash id="eyeOffIcon" class="hidden text-gray-600 size-5" />
                             </button>
                         </div>
                         @error ('password')
@@ -57,15 +54,9 @@
                         @enderror
                     </div>
 
-                    <a href="" class="flex justify-end mt-3 text-sm text-blue-400"
-                        >Forgot Password?</a
-                    >
+                    <a href="" class="flex justify-end mt-3 text-sm text-blue-400">Forgot Password?</a>
 
-                    <button
-                        class="w-full px-3 py-2.5 mt-3 text-sm text-black rounded-sm bg-lime-400"
-                    >
-                        Sign Up
-                    </button>
+                    <button class="w-full px-3 py-2.5 mt-3 text-sm text-black rounded-sm bg-lime-400">Sign Up</button>
                 </form>
 
                 <p class="flex items-baseline justify-center gap-2 mt-3 text-xs">
@@ -79,9 +70,7 @@
                 </div>
 
                 <a href="{{ route('social#redirect', 'google') }}">
-                    <button
-                        class="w-full px-4 py-2.5 mb-5 text-sm text-black border border-gray-300 rounded-sm"
-                    >
+                    <button class="w-full px-4 py-2.5 mb-5 text-sm text-black border border-gray-300 rounded-sm">
                         <div class="flex items-center justify-center gap-2">
                             <img src="{{ asset('icons/google.png') }}" alt="" class="size-5" />
                             Login with Google
@@ -90,9 +79,7 @@
                 </a>
 
                 <a href="{{ route('social#redirect', 'github') }}">
-                    <button
-                        class="w-full px-4 py-2.5 text-sm text-black border border-gray-300 rounded-sm"
-                    >
+                    <button class="w-full px-4 py-2.5 text-sm text-black border border-gray-300 rounded-sm">
                         <div class="flex items-center justify-center gap-2">
                             <img src="{{ asset('icons/github.png') }}" alt="" class="size-5" />
                             Login with Github

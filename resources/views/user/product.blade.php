@@ -1,9 +1,11 @@
 @extends ('layouts.user.app')
 
 @section ('content')
-    <div class="flex w-[70%] mx-auto pt-10 pb-20 items-start">
+    <div
+        class="flex flex-col items-start w-full px-4 pt-6 pb-20 mx-auto max-w-7xl sm:px-6 lg:px-8 lg:pt-10 lg:flex-row"
+    >
         {{-- Filters/sidebar --}}
-        <div class="px-4 rounded-lg shadow-sm w-80 bg-gray-50">
+        <div class="w-full px-4 rounded-lg shadow-sm bg-gray-50 lg:w-80 lg:flex-shrink-0">
             <div class="flex items-center gap-3 py-3 mb-5 border-b">
                 <x-letsicon-filter class="w-5 h-5" />
                 <h1 class="text-lg">Filters</h1>
@@ -11,7 +13,7 @@
 
             <form method="GET" action="{{ route('user#productList') }}">
                 {{-- Price --}}
-                <div class="mb-10">
+                <div class="mb-8 sm:mb-10">
                     <h3>Price Range</h3>
 
                     <div>
@@ -66,6 +68,7 @@
                                 cursor: pointer;
                                 pointer-events: auto;
                             }
+
                             .slider::-moz-range-thumb {
                                 width: 18px;
                                 height: 18px;
@@ -76,10 +79,12 @@
                                 cursor: pointer;
                                 pointer-events: auto;
                             }
+
                             .slider::-webkit-slider-runnable-track {
                                 height: 6px;
                                 background: transparent;
                             }
+
                             .slider::-moz-range-track {
                                 height: 6px;
                                 background: transparent;
@@ -93,12 +98,12 @@
                 </div>
 
                 {{-- Category --}}
-                <div class="mb-10">
+                <div class="mb-8 sm:mb-10">
                     <h3 class="mb-3">Category</h3>
 
                     @forelse ($categories as $category)
                         <label class="flex justify-between mb-3 text-sm cursor-pointer text-black/60">
-                            <div class="flex items-center gap-2 w-[90%]">
+                            <div class="flex items-center w-[90%] gap-2 min-w-0">
                                 <input
                                     type="checkbox"
                                     name="category[]"
@@ -113,10 +118,10 @@
                                     }}
                                 />
 
-                                <span>{{ $category->name }}</span>
+                                <span class="truncate">{{ $category->name }}</span>
                             </div>
 
-                            <span class="flex items-center justify-center w-[10%]">
+                            <span class="flex items-center justify-center w-[10%] flex-shrink-0">
                                 {{ $category->products_count }}
                             </span>
                         </label>
@@ -130,13 +135,14 @@
                     @endforelse
                 </div>
 
+                {{-- Rating --}}
                 <div class="mb-8">
                     <h3 class="mb-3">Rating</h3>
 
-                    <div class="">
+                    <div>
                         @for ($star = 5; $star >= 1; $star--)
                             <label class="flex items-center justify-between mb-3 cursor-pointer">
-                                <div class="flex items-center gap-2 w-[90%]">
+                                <div class="flex items-center w-[90%] gap-2 min-w-0">
                                     <input
                                         type="radio"
                                         name="rating"
@@ -144,7 +150,7 @@
                                         {{ request('rating') == $star ? 'checked' : '' }}
                                     />
 
-                                    <div class="flex text-sm">
+                                    <div class="flex flex-shrink-0 text-sm">
                                         @for ($i = 1; $i <= 5; $i++)
                                             @if ($i <= $star)
                                                 <i class="text-yellow-400 fa-solid fa-star"></i>
@@ -155,11 +161,13 @@
                                     </div>
 
                                     @if ($star < 5)
-                                        <span class="text-sm text-black/60"> and up </span>
+                                        <span class="text-sm text-black/60">and up</span>
                                     @endif
                                 </div>
 
-                                <span class="text-sm text-black/60 w-[10%] flex items-center justify-center">
+                                <span
+                                    class="text-sm text-black/60 w-[10%] flex items-center justify-center flex-shrink-0"
+                                >
                                     {{ $ratingCounts[$star] ?? 0 }}
                                 </span>
                             </label>
@@ -167,20 +175,22 @@
                     </div>
                 </div>
 
-                <div class="flex items-center justify-end gap-3 pb-5 mr-3">
+                {{-- Buttons --}}
+                <div class="flex items-center justify-end gap-3 pb-5 mr-0 sm:mr-3">
                     <a
                         href="{{ route('user#productList') }}"
-                        class="px-6 py-2 text-sm text-center border rounded text-black/60"
+                        class="px-5 py-2 text-sm text-center border rounded sm:px-6 text-black/60"
                     >
                         reset
                     </a>
 
-                    <button type="submit" class="px-6 py-2 text-sm rounded bg-lime-400">Apply</button>
+                    <button type="submit" class="px-5 py-2 text-sm rounded sm:px-6 bg-lime-400">Apply</button>
                 </div>
             </form>
         </div>
 
-        <div class="grid flex-1 grid-cols-1 gap-5 ml-6 md:grid-cols-2 lg:grid-cols-3">
+        {{-- Products --}}
+        <div class="grid w-full grid-cols-1 gap-5 mt-6 lg:flex-1 lg:grid-cols-2 xl:grid-cols-3 lg:ml-6 lg:mt-0">
             @forelse ($products as $product)
                 @php
                     $variant = $product->variants->first();
@@ -190,7 +200,7 @@
                     $image2 = $images->get(1);
                 @endphp
 
-                <div class="pb-2 rounded-lg shadow-sm bg-gray-50">
+                <div class="pb-2 overflow-hidden rounded-lg shadow-sm bg-gray-50">
                     <a href="{{ route('user#productDetails', $product->id) }}">
                         {{-- Images --}}
                         <div class="relative group">
@@ -212,8 +222,8 @@
                         </div>
 
                         {{-- Product information --}}
-                        <div class="p-5 space-y-2 text-lg">
-                            <p class="text-black/70">{{ $product->name }}</p>
+                        <div class="p-4 space-y-2 text-lg sm:p-5">
+                            <p class="truncate text-black/70">{{ $product->name }}</p>
 
                             <p>{{ number_format($variant?->price ?? 0) }} MMK</p>
 
@@ -221,31 +231,44 @@
                                 $averageRating = $product->ratings_avg_rating ?? 0;
                             @endphp
 
-                            <div class="flex items-center gap-1 pb-1 text-xs">
+                            <div class="flex flex-wrap items-center gap-1 pb-1 text-xs">
                                 @for ($i = 1; $i <= 5; $i++)
                                     <i
                                         class="fa-solid fa-star
-                            {{ $i <= round($averageRating)
-                                ? 'text-yellow-400'
-                                : 'text-gray-300' }}"
-                                    >
-                                    </i>
+                                    {{ $i <= round($averageRating)
+                                        ? 'text-yellow-400'
+                                        : 'text-gray-300' }}"
+                                    ></i>
                                 @endfor
 
-                                <span class="ml-2 text-sm"> {{ number_format($averageRating, 1) }} </span>
+                                <span class="ml-1 text-sm sm:ml-2"> {{ number_format($averageRating, 1) }} </span>
 
-                                <span class="ml-2 text-sm text-black/50"> {{ $product->ratings_count }} reviews </span>
+                                <span class="ml-1 text-sm sm:ml-2 text-black/50">
+                                    {{ $product->ratings_count }} reviews
+                                </span>
                             </div>
                         </div>
                     </a>
 
-                    <div class="flex gap-3 px-5 pb-5">
-                        <button type="button" class="px-3 py-2 text-sm border-2 rounded text-black/50">
+                    {{-- Buttons --}}
+                    {{-- <div class="flex flex-col gap-2 px-4 pb-4 sm:flex-row sm:px-5 sm:pb-5 sm:gap-3">
+                        <button type="button" class="flex-1 px-3 py-2 text-sm border-2 rounded text-black/50">
                             <i class="mr-2 fa-solid fa-cart-arrow-down"></i>
                             Add To Cart
                         </button>
 
-                        <button type="button" class="py-2 text-sm text-black rounded px-7 bg-lime-400">Buy Now</button>
+                        <button type="button" class="flex-1 py-2 text-sm text-black rounded bg-lime-400">
+                            Buy Now
+                        </button>
+                    </div> --}}
+                    <div class="px-4 pb-4 sm:px-5 sm:pb-5">
+                        <a
+                            href="{{ route('user#productDetails', $product->id) }}"
+                            class="flex items-center justify-center w-full gap-2 px-4 py-2 text-sm text-center text-black transition rounded bg-lime-400 hover:bg-lime-500"
+                        >
+                            {{-- <i class="fa-solid fa-eye"></i> --}}
+                            View Product
+                        </a>
                     </div>
                 </div>
 
@@ -258,7 +281,7 @@
                         (request()->filled('max_price') && request('max_price') < $maxPrice);
                 @endphp
 
-                <div class="px-6 py-16 text-center bg-gray-50 col-span-full">
+                <div class="px-4 py-12 text-center bg-gray-50 sm:px-6 sm:py-16 col-span-full">
                     <div class="flex flex-col items-center justify-center">
                         <div class="flex items-center justify-center w-16 h-16 mb-4 bg-gray-100 rounded-full">
                             @if ($hasFilters)
@@ -271,7 +294,7 @@
                         @if ($hasFilters)
                             <h3 class="font-medium text-gray-700">No matching products</h3>
 
-                            <p class="max-w-md mt-1 text-sm text-gray-400">We couldn't find any products matching your current search or filters. Try changing your filters or clearing them to see all products.</p>
+                            <p class="max-w-md px-2 mt-1 text-sm text-gray-400">We couldn't find any products matching your current search or filters. Try changing your filters or clearing them to see all products.</p>
 
                             <a
                                 href="{{ route('user#productList') }}"
@@ -283,17 +306,19 @@
                         @else
                             <h3 class="font-medium text-gray-700">No products yet</h3>
 
-                            <p class="max-w-md mt-1 text-sm text-gray-400">There are no products available to display yet. Products will appear here when they are added.</p>
+                            <p class="max-w-md px-2 mt-1 text-sm text-gray-400">There are no products available to display yet. Products will appear here when they are added.</p>
                         @endif
                     </div>
                 </div>
+
             @endforelse
         </div>
     </div>
 
+    {{-- Order Success Modal --}}
     @if (session('orderSuccess'))
         <div id="order-success-modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/50">
-            <div class="w-full max-w-md p-8 text-center bg-white shadow-2xl rounded-2xl">
+            <div class="w-full max-w-md p-6 text-center bg-white shadow-2xl sm:p-8 rounded-2xl">
                 {{-- Success Icon --}}
                 <div class="flex items-center justify-center w-16 h-16 mx-auto rounded-full bg-lime-400">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -308,22 +333,23 @@
                 <p class="mt-3 text-sm text-gray-500">Thank you for your purchase. Your order has been successfully placed.</p>
 
                 {{-- Order ID --}}
-                {{-- <div class="px-4 py-3 mt-5 rounded-lg bg-gray-50"> --}}
-                <p class="mt-5 text-sm text-gray-500">Your order number is <span class="font-semibold text-gray-900">{{ session('orderId') }}</span></p>
-                {{-- </div> --}}
+                <p class="mt-5 text-sm text-gray-500">
+                    Your order number is
+                    <span class="font-semibold text-gray-900"> {{ session('orderId') }} </span>
+                </p>
 
                 {{-- Buttons --}}
-                <div class="flex items-center gap-3 mt-6">
+                <div class="flex flex-col gap-3 mt-6 sm:flex-row">
                     <a
                         href="{{ route('user#myOrder') }}"
-                        class="w-1/2 px-6 py-2 text-sm text-center transition border rounded hover:bg-gray-100"
+                        class="w-full px-6 py-2 text-sm text-center transition border rounded sm:w-1/2 hover:bg-gray-100"
                     >
                         View Order
                     </a>
 
                     <a
                         href="{{ route('user#productList') }}"
-                        class="w-1/2 px-6 py-2 text-sm transition rounded bg-lime-400 hover:bg-lime-500"
+                        class="w-full px-6 py-2 text-sm transition rounded sm:w-1/2 bg-lime-400 hover:bg-lime-500"
                     >
                         Continue Shopping
                     </a>

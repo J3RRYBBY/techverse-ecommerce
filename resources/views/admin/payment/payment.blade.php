@@ -17,7 +17,7 @@
             </a>
         </div>
 
-        @if (session('createSuccess'))
+        {{-- @if (session('createSuccess'))
             <div class="p-4 mb-5 text-green-700 bg-green-100 rounded-lg">{{ session('createSuccess') }}</div>
         @endif
 
@@ -27,7 +27,7 @@
 
         @if (session('deleteSuccess'))
             <div class="p-4 mb-5 text-green-700 bg-green-100 rounded-lg">{{ session('deleteSuccess') }}</div>
-        @endif
+        @endif --}}
 
         <div class="overflow-x-auto">
             <div class="min-h-screen py-2 bg-white rounded-lg">
@@ -164,5 +164,44 @@
             </div>
         </div>
     </div>
+
+    @if (session('createSuccess'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: @json (session('success')),
+                    confirmButtonColor: '#4f46e5',
+                });
+            });
+        </script>
+    @endif
+
+    @if (session('updateSuccess'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: @json (session('success')),
+                    confirmButtonColor: '#4f46e5',
+                });
+            });
+        </script>
+    @endif
+
+    @if (session('deleteSuccess'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: @json (session('success')),
+                    confirmButtonColor: '#4f46e5',
+                });
+            });
+        </script>
+    @endif
 
 @endsection

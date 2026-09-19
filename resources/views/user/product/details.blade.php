@@ -6,11 +6,11 @@
         $initialImage = $initialVariant?->images->first();
     @endphp
 
-    <div class="w-[70%] mx-auto mt-10">
+    <div class="w-[92%] mx-auto mt-6 sm:w-[90%] sm:mt-8 md:w-[85%] lg:w-[80%] xl:w-[70%]">
         {{-- Back --}}
         <a
             href="{{ route('user#productList') }}"
-            class="inline-flex items-center gap-2 mb-6 text-sm text-gray-500 hover:text-gray-900"
+            class="inline-flex items-center gap-2 mb-5 text-sm text-gray-500 transition hover:text-gray-900 sm:mb-6"
         >
             <i class="fa-solid fa-arrow-left"></i>
             Back to Products
@@ -19,7 +19,7 @@
         {{-- =========================================================
             PRODUCT SECTION
         ========================================================== --}}
-        <div class="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12 xl:gap-16">
             {{-- =====================================================
                 LEFT - PRODUCT IMAGES
             ====================================================== --}}
@@ -30,12 +30,14 @@
                         <img
                             id="detailPreviewImage"
                             src="{{ $initialImage->image }}"
-                            class="object-contain w-full h-[420px] md:h-[520px] p-6 md:p-10 transition duration-300"
+                            class="object-contain w-full h-[300px] xs:h-[340px] sm:h-[400px] md:h-[480px] lg:h-[430px] xl:h-[520px] p-4 sm:p-6 md:p-8 lg:p-6 xl:p-10 transition duration-300"
                             alt="{{ $product->name }}"
                         />
                     @else
-                        <div class="flex items-center justify-center w-full h-[420px] md:h-[520px] text-gray-300">
-                            <i class="text-6xl fa-regular fa-image"></i>
+                        <div
+                            class="flex items-center justify-center w-full h-[300px] sm:h-[400px] md:h-[480px] lg:h-[430px] xl:h-[520px] text-gray-300"
+                        >
+                            <i class="text-5xl sm:text-6xl fa-regular fa-image"></i>
                         </div>
                     @endif
 
@@ -43,18 +45,18 @@
                     <button
                         id="detailPrevBtn"
                         type="button"
-                        class="absolute flex items-center justify-center transition -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-sm w-11 h-11 left-4 top-1/2 hover:bg-lime-400 hover:border-lime-400"
+                        class="absolute flex items-center justify-center transition -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-sm w-9 h-9 sm:w-11 sm:h-11 left-2 sm:left-4 top-1/2 hover:bg-lime-400 hover:border-lime-400"
                     >
-                        <i class="text-sm fa-solid fa-chevron-left"></i>
+                        <i class="text-xs sm:text-sm fa-solid fa-chevron-left"></i>
                     </button>
 
                     {{-- Next --}}
                     <button
                         id="detailNextBtn"
                         type="button"
-                        class="absolute flex items-center justify-center transition -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-sm w-11 h-11 right-4 top-1/2 hover:bg-lime-400 hover:border-lime-400"
+                        class="absolute flex items-center justify-center transition -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-sm w-9 h-9 sm:w-11 sm:h-11 right-2 sm:right-4 top-1/2 hover:bg-lime-400 hover:border-lime-400"
                     >
-                        <i class="text-sm fa-solid fa-chevron-right"></i>
+                        <i class="text-xs sm:text-sm fa-solid fa-chevron-right"></i>
                     </button>
                 </div>
 
@@ -63,13 +65,13 @@
                 ================================================== --}}
                 <div
                     id="detailThumbnailContainer"
-                    class="flex items-center gap-3 overflow-x-auto scroll-smooth scrollbar-hide"
+                    class="flex items-center gap-2 mt-2 overflow-x-auto scroll-smooth scrollbar-hide sm:gap-3"
                 >
                     @foreach ($product->variants as $variant)
                         @foreach ($variant->images as $image)
                             <button
                                 type="button"
-                                class="flex-shrink-0 w-20 h-20 overflow-hidden transition border-2 border-transparent rounded-xl detail-thumb-btn hover:border-lime-300"
+                                class="flex-shrink-0 w-16 h-16 overflow-hidden transition border-2 border-transparent rounded-lg sm:w-20 sm:h-20 sm:rounded-xl detail-thumb-btn hover:border-lime-300"
                                 data-src="{{ $image->image }}"
                             >
                                 <img
@@ -78,17 +80,16 @@
                                     alt="{{ $product->name }}"
                                 />
                             </button>
-
                         @endforeach
                     @endforeach
                 </div>
 
                 {{-- Thumbnail Buttons --}}
-                <div class="flex items-center gap-3 mt-5">
+                <div class="flex items-center gap-2 mt-4 sm:gap-3 sm:mt-5">
                     <button
                         type="button"
                         id="detailThumbPrev"
-                        class="flex items-center justify-center flex-shrink-0 w-10 h-10 transition bg-white border border-gray-200 rounded-full hover:bg-lime-400 hover:border-lime-400"
+                        class="flex items-center justify-center flex-shrink-0 transition bg-white border border-gray-200 rounded-full w-9 h-9 sm:w-10 sm:h-10 hover:bg-lime-400 hover:border-lime-400"
                     >
                         <i class="text-xs fa-solid fa-chevron-left"></i>
                     </button>
@@ -96,7 +97,7 @@
                     <button
                         type="button"
                         id="detailThumbNext"
-                        class="flex items-center justify-center flex-shrink-0 w-10 h-10 transition bg-white border border-gray-200 rounded-full hover:bg-lime-400 hover:border-lime-400"
+                        class="flex items-center justify-center flex-shrink-0 transition bg-white border border-gray-200 rounded-full w-9 h-9 sm:w-10 sm:h-10 hover:bg-lime-400 hover:border-lime-400"
                     >
                         <i class="text-xs fa-solid fa-chevron-right"></i>
                     </button>
@@ -108,10 +109,8 @@
             ====================================================== --}}
             <div class="flex flex-col">
                 {{-- Product Name --}}
-                <div class="pb-6 border-b border-gray-100">
-                    {{-- <p class="mb-3 text-xs font-semibold tracking-[0.2em] uppercase text-lime-600">techVerse</p> --}}
-
-                    <h1 class="text-3xl md:text-4xl">{{ $product->name }}</h1>
+                <div class="pb-5 border-b border-gray-100 sm:pb-6">
+                    <h1 class="text-2xl font-semibold leading-tight sm:text-3xl md:text-4xl">{{ $product->name }}</h1>
 
                     {{-- Rating --}}
                     @php
@@ -119,11 +118,11 @@
                         $ratingCount = $product->ratings->count();
                     @endphp
 
-                    <div class="flex items-center gap-3 mt-4">
+                    <div class="flex flex-wrap items-center gap-2 mt-4 sm:gap-3">
                         <div class="flex gap-1">
                             @for ($i = 1; $i <= 5; $i++)
                                 <i
-                                    class="text-sm fa-solid fa-star
+                                    class="text-xs sm:text-sm fa-solid fa-star
                                     {{ $i <= round($averageRating)
                                         ? 'text-yellow-400'
                                         : 'text-gray-300' }}"
@@ -140,8 +139,10 @@
                 </div>
 
                 {{-- Price --}}
-                <div class="py-6">
-                    <p id="productPrice" class="text-3xl font-medium">{{ number_format($initialVariant->price) }} MMK</p>
+                <div class="py-5 sm:py-6">
+                    <p id="productPrice" class="text-2xl font-medium sm:text-3xl">
+                        {{ number_format($initialVariant->price) }} MMK
+                    </p>
 
                     <div class="flex items-center gap-2 mt-2">
                         <span class="w-2 h-2 rounded-full bg-lime-500"></span>
@@ -159,8 +160,8 @@
                 {{-- =================================================
                     CAPACITY
                 ================================================== --}}
-                <div class="mb-7">
-                    <div class="flex items-center gap-3 mb-3">
+                <div class="mb-6 sm:mb-7">
+                    <div class="flex flex-wrap items-center gap-2 mb-3 sm:gap-3">
                         <p class="text-sm font-semibold">Capacity :</p>
 
                         <span id="selectedCapacity" class="text-sm font-medium text-gray-500">
@@ -172,12 +173,11 @@
                         @foreach ($product->variants->pluck('capacity')->unique() as $capacity)
                             <button
                                 type="button"
-                                class="px-5 py-2.5 text-sm font-medium transition border border-gray-200 rounded-lg capacity-btn hover:border-lime-400 hover:bg-lime-50"
+                                class="px-4 py-2 text-sm font-medium transition border border-gray-200 rounded-lg sm:px-5 sm:py-2.5 hover:border-lime-400 hover:bg-lime-50"
                                 data-capacity="{{ $capacity }}"
                             >
                                 {{ $capacity }}
                             </button>
-
                         @endforeach
                     </div>
                 </div>
@@ -185,8 +185,8 @@
                 {{-- =================================================
                     COLOR
                 ================================================== --}}
-                <div class="mb-7">
-                    <div class="flex items-center gap-3 mb-3">
+                <div class="mb-6 sm:mb-7">
+                    <div class="flex flex-wrap items-center gap-2 mb-3 sm:gap-3">
                         <p class="text-sm font-semibold">Color :</p>
 
                         <span id="selectedColor" class="text-sm font-medium text-gray-500">
@@ -198,12 +198,11 @@
                         @foreach ($product->variants->pluck('color')->unique() as $color)
                             <button
                                 type="button"
-                                class="px-5 py-2.5 text-sm font-medium transition border border-gray-200 rounded-lg color-btn hover:border-lime-400 hover:bg-lime-50"
+                                class="px-4 py-2 text-sm font-medium transition border border-gray-200 rounded-lg sm:px-5 sm:py-2.5 hover:border-lime-400 hover:bg-lime-50"
                                 data-color="{{ $color }}"
                             >
                                 {{ $color }}
                             </button>
-
                         @endforeach
                     </div>
                 </div>
@@ -211,13 +210,15 @@
                 {{-- =================================================
                     QUANTITY + ADD TO CART
                 ================================================== --}}
-                <div class="flex flex-col gap-3 sm:flex-row">
+                <div class="flex flex-row items-center gap-2 pb-6 border-b border-gray-100 sm:gap-3 sm:pb-7">
                     {{-- Quantity --}}
-                    <div class="flex items-center justify-between h-12 px-2 border border-gray-200 rounded-lg sm:w-36">
+                    <div
+                        class="flex items-center justify-between flex-shrink-0 w-[120px] h-14 px-1.5 border border-gray-200 rounded-lg sm:w-36 sm:h-12 sm:px-2"
+                    >
                         <button
                             id="decrease"
                             type="button"
-                            class="flex items-center justify-center text-lg text-gray-500 transition rounded-md w-9 h-9 hover:bg-gray-100 hover:text-gray-900"
+                            class="flex items-center justify-center flex-shrink-0 text-lg text-gray-500 transition rounded-md w-9 h-9 hover:bg-gray-100 hover:text-gray-900"
                         >
                             <i class="text-xs fa-solid fa-minus"></i>
                         </button>
@@ -226,14 +227,14 @@
                             type="text"
                             id="quantity"
                             value="1"
-                            class="w-10 text-sm font-semibold text-center text-gray-900 outline-none"
+                            class="w-8 text-sm font-semibold text-center text-gray-900 outline-none sm:w-10"
                             readonly
                         />
 
                         <button
                             id="increase"
                             type="button"
-                            class="flex items-center justify-center text-lg text-gray-500 transition rounded-md w-9 h-9 hover:bg-gray-100 hover:text-gray-900"
+                            class="flex items-center justify-center flex-shrink-0 text-lg text-gray-500 transition rounded-md w-9 h-9 hover:bg-gray-100 hover:text-gray-900"
                         >
                             <i class="text-xs fa-solid fa-plus"></i>
                         </button>
@@ -243,49 +244,22 @@
                     <button
                         id="addToCartBtn"
                         type="button"
-                        class="flex items-center justify-center flex-1 h-12 gap-2 px-6 font-medium transition rounded-lg bg-lime-400 hover:bg-lime-500 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"
+                        class="flex items-center justify-center flex-1 gap-2 px-3 text-sm font-medium transition rounded-lg h-14 sm:h-12 sm:px-6 sm:text-base bg-lime-400 hover:bg-lime-500 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"
                     >
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span>Add To Cart</span>
+                        <i class="text-sm fa-solid fa-cart-shopping"></i>
+                        <span class="whitespace-nowrap">Add To Cart</span>
                     </button>
-                </div>
-
-                {{-- =================================================
-                    PRODUCT FEATURES
-                ================================================== --}}
-                <div class="grid grid-cols-3 gap-3 py-6 border-gray-100 mt-7 border-y">
-                    <div class="flex flex-col items-center gap-2 text-center">
-                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-lime-50">
-                            <i class="text-sm fa-solid fa-truck text-lime-600"></i>
-                        </div>
-
-                        <span class="text-xs font-medium text-gray-600"> Fast Delivery </span>
-                    </div>
-
-                    <div class="flex flex-col items-center gap-2 text-center">
-                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-lime-50">
-                            <i class="text-sm fa-solid fa-shield-halved text-lime-600"></i>
-                        </div>
-
-                        <span class="text-xs font-medium text-gray-600"> Secure Payment </span>
-                    </div>
-
-                    <div class="flex flex-col items-center gap-2 text-center">
-                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-lime-50">
-                            <i class="text-sm fa-solid fa-headset text-lime-600"></i>
-                        </div>
-
-                        <span class="text-xs font-medium text-gray-600"> Support </span>
-                    </div>
                 </div>
 
                 {{-- =================================================
                     DESCRIPTION
                 ================================================== --}}
-                <div class="pt-7">
-                    <h2 class="mb-3 text-xl font-semibold">Product Description</h2>
+                <div class="pt-6 sm:pt-7">
+                    <h2 class="mb-3 text-lg font-semibold sm:text-xl">Product Description</h2>
 
-                    <p class="leading-7 whitespace-pre-line text-black/60">{{ $product->description }}</p>
+                    <p class="text-sm leading-7 whitespace-pre-line sm:text-base text-black/60">
+                        {{ $product->description }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -294,21 +268,21 @@
             RELATED PRODUCTS
         ========================================================== --}}
         @if ($relatedProducts->count() > 0)
-            <section class="mt-20 md:mt-28">
-                <div class="flex items-center justify-between mb-8">
+            <section class="mt-16 md:mt-24 lg:mt-28">
+                <div class="flex flex-col gap-4 mb-7 sm:flex-row sm:items-center sm:justify-between sm:mb-8">
                     <div>
                         <p class="mb-2 text-xs font-semibold tracking-[0.2em] uppercase text-lime-600">You may also like</p>
 
                         <h2 class="text-2xl font-semibold text-gray-900 md:text-3xl">Related Products</h2>
                     </div>
 
-                    <a href="{{ route('user#productList') }}" class="text-sm font-medium">
+                    <a href="{{ route('user#productList') }}" class="self-start text-sm font-medium sm:self-auto">
                         View All
                         <i class="ml-1 fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
 
-                <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:gap-5">
                     @foreach ($relatedProducts as $relatedProduct)
                         @php
                             $relatedVariant = $relatedProduct->variants->first();
@@ -334,25 +308,15 @@
                                 </div>
 
                                 {{-- Product Information --}}
-                                <div class="p-5 space-y-2 text-lg">
-                                    {{-- <a href="{{ route('user#productDetails', $relatedProduct->id) }}" class="block">
-                                    <h3
-                                        class="font-medium text-gray-900 truncate hover:text-lime-600"
-                                        title="{{ $relatedProduct->name }}"
-                                    >
-                                        {{ $relatedProduct->name }}
-                                    </h3>
-                                </a> --}}
-
+                                <div class="p-4 space-y-2 text-base sm:p-5 sm:text-lg">
                                     <p class="text-black/70">{{ $relatedProduct->name }}</p>
 
                                     {{-- Rating --}}
-                                    <div class="flex items-center gap-2 mt-2">
+                                    <div class="flex flex-wrap items-center gap-2 mt-2">
                                         <div class="flex gap-0.5 text-sm text-yellow-400">
                                             @for ($i = 1; $i <= 5; $i++)
                                                 <i
-                                                    class="text-sm fa-solid fa-star {{ $i <= round($relatedProduct->ratings_avg_rating ?? 0) ? 'text-yellow-400'
-                                                : 'text-gray-300' }}"
+                                                    class="text-sm fa-solid fa-star {{ $i <= round($relatedProduct->ratings_avg_rating ?? 0) ? 'text-yellow-400' : 'text-gray-300' }}"
                                                 ></i>
                                             @endfor
                                         </div>
@@ -369,10 +333,12 @@
                                     {{-- Price --}}
                                     @if ($relatedVariant)
                                         <div class="mt-3">
-                                            <p class="">{{ number_format($relatedVariant->price) }} MMK</p>
+                                            <p>{{ number_format($relatedVariant->price) }} MMK</p>
                                         </div>
                                     @else
-                                        <div class="mt-3"><p>Price unavailable</p></div>
+                                        <div class="mt-3">
+                                            <p>Price unavailable</p>
+                                        </div>
                                     @endif
 
                                     {{-- Stock --}}
@@ -392,7 +358,6 @@
                                 </div>
                             </a>
                         </div>
-
                     @endforeach
                 </div>
             </section>
@@ -401,21 +366,21 @@
         {{-- =========================================================
             REVIEWS
         ========================================================== --}}
-        <section class="pb-20 mt-20 md:mt-28">
+        <section class="pb-16 mt-16 md:mt-24 lg:mt-28 sm:pb-20">
             {{-- Review Header --}}
-            <div class="mb-8">
+            <div class="mb-7 sm:mb-8">
                 <p class="mb-2 text-xs font-semibold tracking-[0.2em] uppercase text-lime-600">Customer Feedback</p>
 
                 <h2 class="text-2xl font-semibold text-gray-900 md:text-3xl">Reviews</h2>
             </div>
 
             {{-- Review Tabs --}}
-            <div class="flex gap-8 border-b border-gray-200">
+            <div class="flex gap-6 overflow-x-auto border-b border-gray-200 scrollbar-hide sm:gap-8">
                 <button
                     type="button"
                     id="myReviewBtn"
                     onclick="showReviewTab('myReview')"
-                    class="px-1 pb-4 text-sm font-semibold text-gray-900 border-b-2 border-lime-400"
+                    class="flex-shrink-0 px-1 pb-4 text-sm font-semibold text-gray-900 border-b-2 border-lime-400"
                 >
                     My Review
                 </button>
@@ -424,7 +389,7 @@
                     type="button"
                     id="allReviewsBtn"
                     onclick="showReviewTab('allReviews')"
-                    class="px-1 pb-4 text-sm font-medium text-gray-400 border-b-2 border-transparent hover:text-gray-900"
+                    class="flex-shrink-0 px-1 pb-4 text-sm font-medium text-gray-400 border-b-2 border-transparent hover:text-gray-900"
                 >
                     All Reviews
                 </button>
@@ -433,21 +398,19 @@
             {{-- =====================================================
                 MY REVIEW
             ====================================================== --}}
-            <div id="myReview" class="mt-8">
-                <div class="max-w-2xl p-6 mx-auto bg-gray-50 md:p-10 rounded-2xl">
+            <div id="myReview" class="mt-7 sm:mt-8">
+                <div class="w-full max-w-2xl p-5 mx-auto bg-gray-50 sm:p-8 md:p-10 rounded-2xl">
                     <div class="text-center">
                         <div class="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-full bg-lime-100">
                             <i class="text-lime-600 fa-solid fa-star"></i>
                         </div>
 
-                        <h3 class="text-2xl font-semibold text-gray-900">
-                            Give Feedback
-                            </3>
+                        <h3 class="text-xl font-semibold text-gray-900 sm:text-2xl">Give Feedback</h3>
 
-                            <p class="max-w-md mx-auto mt-2 text-sm leading-6 text-gray-500">What do you think about this product and your experience?</p>
+                        <p class="max-w-md mx-auto mt-2 text-sm leading-6 text-gray-500">What do you think about this product and your experience?</p>
                     </div>
 
-                    <form action="{{ route('user#feedback', $product) }}" method="POST" class="mt-8">
+                    <form action="{{ route('user#feedback', $product) }}" method="POST" class="mt-7 sm:mt-8">
                         @csrf
 
                         {{-- Rating --}}
@@ -470,7 +433,7 @@
                                         />
 
                                         <span
-                                            class="flex items-center justify-center w-10 h-10 transition rounded-lg star
+                                            class="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 transition rounded-lg star
                                             {{
                                                 $userRating && $i <= $userRating->rating
                                                     ? 'text-yellow-400 bg-yellow-50'
@@ -478,16 +441,15 @@
                                             }}"
                                             data-value="{{ $i }}"
                                         >
-                                            <i class="text-lg fa-solid fa-star"></i>
+                                            <i class="text-base sm:text-lg fa-solid fa-star"></i>
                                         </span>
                                     </label>
-
                                 @endfor
                             </div>
                         </div>
 
                         {{-- Comment --}}
-                        <div class="mt-7">
+                        <div class="mt-6 sm:mt-7">
                             <label for="message" class="block mb-2 text-sm font-semibold text-gray-800">
                                 What are the main reasons for your rating?
                             </label>
@@ -510,7 +472,7 @@
                         <div class="flex justify-end mt-5">
                             <button
                                 type="submit"
-                                class="py-3 text-sm font-semibold transition rounded-lg px-7 bg-lime-400 hover:bg-lime-500"
+                                class="w-full py-3 text-sm font-semibold transition rounded-lg px-7 sm:w-auto bg-lime-400 hover:bg-lime-500"
                             >
                                 Submit Review
                             </button>
@@ -522,23 +484,23 @@
             {{-- =====================================================
                 ALL REVIEWS
             ====================================================== --}}
-            <div id="allReviews" class="hidden mt-8">
-                <div class="max-w-3xl mx-auto">
+            <div id="allReviews" class="hidden mt-7 sm:mt-8">
+                <div class="w-full max-w-3xl mx-auto">
                     @forelse ($ratings as $rating)
                         @php
                             $comment = $comments->where('user_id', $rating->user_id)->first();
                         @endphp
 
-                        <div class="p-6 mb-4 bg-white border border-gray-100 rounded-2xl">
+                        <div class="p-4 mb-4 bg-white border border-gray-100 sm:p-6 rounded-2xl">
                             {{-- User --}}
-                            <div class="flex items-center justify-between">
+                            <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                                 <div class="flex items-center gap-3">
                                     <img
                                         src="{{ $rating->user->profile_image
                                             ? $rating->user->profile_image
                                             : asset('defaultImage/user.png') }}"
                                         alt="{{ $rating->user->name }}"
-                                        class="object-cover border border-gray-100 rounded-full w-11 h-11"
+                                        class="object-cover w-10 h-10 border border-gray-100 rounded-full sm:w-11 sm:h-11"
                                     />
 
                                     <div>
@@ -559,7 +521,6 @@
                                                 ? 'text-yellow-400'
                                                 : 'text-gray-300' }}"
                                         ></i>
-
                                     @endfor
                                 </div>
                             </div>
@@ -569,12 +530,10 @@
                                 <div class="pt-5 mt-5 border-t border-gray-100">
                                     <p class="text-sm leading-7 text-gray-600">{{ $comment->message }}</p>
                                 </div>
-
                             @endif
                         </div>
-
                     @empty
-                        <div class="py-16 text-center bg-gray-50 rounded-2xl">
+                        <div class="py-12 text-center bg-gray-50 sm:py-16 rounded-2xl">
                             <div class="flex items-center justify-center mx-auto bg-white rounded-full w-14 h-14">
                                 <i class="text-xl text-gray-300 fa-regular fa-comment"></i>
                             </div>
@@ -583,7 +542,6 @@
 
                             <p class="mt-1 text-xs text-gray-400">Be the first to review this product.</p>
                         </div>
-
                     @endforelse
                 </div>
             </div>
@@ -601,7 +559,6 @@
 
             variants: [
                 @foreach ($product->variants as $variant)
-
                 {
                     id: {{ $variant->id }},
 
@@ -615,7 +572,6 @@
 
                     images: [
                         @foreach ($variant->images as $image)
-
                         @json ($image->image),
 
                         @endforeach
@@ -625,426 +581,12 @@
                 @endforeach
             ],
         };
-    </script>
 
-    {{-- =============================================================
-        VARIANT + QUANTITY
-    ============================================================== --}}
-    <script>
-        const decreaseBtn = document.getElementById('decrease');
-        const increaseBtn = document.getElementById('increase');
-        const quantityInput = document.getElementById('quantity');
-        const addToCartBtn = document.getElementById('addToCartBtn');
-        const stockStatus = document.getElementById('stockStatus');
-
-        let quantity = 1;
-        let currentStock = 0;
-
-        function getSelectedVariant() {
-            return window.productData.variants.find(
-                (variant) =>
-                    variant.capacity === window.productData.selectedCapacity &&
-                    variant.color === window.productData.selectedColor,
-            );
-        }
-
-        function updateQuantity() {
-            quantityInput.value = quantity;
-
-            decreaseBtn.disabled = quantity <= 1;
-
-            increaseBtn.disabled = quantity >= currentStock;
-
-            decreaseBtn.classList.toggle('opacity-40', decreaseBtn.disabled);
-
-            increaseBtn.classList.toggle('opacity-40', increaseBtn.disabled);
-
-            decreaseBtn.classList.toggle('cursor-not-allowed', decreaseBtn.disabled);
-
-            increaseBtn.classList.toggle('cursor-not-allowed', increaseBtn.disabled);
-        }
-
-        function updateStockStatus(stock) {
-            if (stock > 0) {
-                stockStatus.textContent = 'In Stock';
-
-                stockStatus.classList.remove('text-red-500');
-
-                stockStatus.classList.add('text-lime-600');
-            } else {
-                stockStatus.textContent = 'Out of Stock';
-
-                stockStatus.classList.remove('text-lime-600');
-
-                stockStatus.classList.add('text-red-500');
-            }
-        }
-
-        function updateVariant() {
-            const variant = getSelectedVariant();
-
-            {{-- No matching variant --}}
-            if (!variant) {
-                currentStock = 0;
-
-                quantity = 0;
-
-                updateQuantity();
-
-                document.getElementById('productPrice').textContent = 'Unavailable';
-
-                updateStockStatus(0);
-
-                addToCartBtn.disabled = true;
-
-                addToCartBtn.innerHTML = `
-                    <i class="fa-solid fa-ban"></i>
-                    <span>Unavailable</span>
-                `;
-
-                return;
-            }
-
-            {{-- Update price --}}
-            document.getElementById('productPrice').textContent = Number(variant.price).toLocaleString() + ' MMK';
-
-            {{-- Update stock --}}
-            currentStock = Number(variant.stock);
-
-            updateStockStatus(currentStock);
-
-            {{-- Reset quantity --}}
-            quantity = currentStock > 0 ? 1 : 0;
-
-            updateQuantity();
-
-            {{-- Update image --}}
-            if (variant.images && variant.images.length > 0) {
-                document.getElementById('detailPreviewImage').src = variant.images[0];
-            }
-
-            {{-- Out of stock --}}
-            if (currentStock <= 0) {
-                addToCartBtn.disabled = true;
-
-                addToCartBtn.innerHTML = `
-                    <i class="fa-solid fa-ban"></i>
-                    <span>Out of Stock</span>
-                `;
-
-                return;
-            }
-
-            {{-- In stock --}}
-            addToCartBtn.disabled = false;
-
-            addToCartBtn.innerHTML = `
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span>Add To Cart</span>
-            `;
-        }
-
-        increaseBtn.addEventListener('click', () => {
-            if (quantity < currentStock) {
-                quantity++;
-
-                updateQuantity();
-            }
-        });
-
-        decreaseBtn.addEventListener('click', () => {
-            if (quantity > 1) {
-                quantity--;
-
-                updateQuantity();
-            }
-        });
-
-        updateVariant();
-    </script>
-
-    {{-- =============================================================
-        CAPACITY
-    ============================================================== --}}
-    <script>
-        document.querySelectorAll('.capacity-btn').forEach((button) => {
-            button.addEventListener('click', function () {
-                window.productData.selectedCapacity = this.dataset.capacity;
-
-                document.getElementById('selectedCapacity').textContent = this.dataset.capacity;
-
-                document.querySelectorAll('.capacity-btn').forEach((btn) => {
-                    btn.classList.remove('bg-lime-400', 'border-lime-400', 'text-gray-900');
-
-                    btn.classList.add('bg-white', 'border-gray-200');
-                });
-
-                this.classList.remove('bg-white', 'border-gray-200');
-
-                this.classList.add('bg-lime-400', 'border-lime-400', 'text-gray-900');
-
-                updateVariant();
-            });
-        });
-
-        {{-- Initial selected capacity --}}
-        document.querySelectorAll('.capacity-btn').forEach((button) => {
-            if (button.dataset.capacity === window.productData.selectedCapacity) {
-                button.classList.remove('bg-white', 'border-gray-200');
-
-                button.classList.add('bg-lime-400', 'border-lime-400', 'text-gray-900');
-            }
-        });
-    </script>
-
-    {{-- =============================================================
-        COLOR
-    ============================================================== --}}
-    <script>
-        document.querySelectorAll('.color-btn').forEach((button) => {
-            button.addEventListener('click', function () {
-                window.productData.selectedColor = this.dataset.color;
-
-                document.getElementById('selectedColor').textContent = this.dataset.color;
-
-                document.querySelectorAll('.color-btn').forEach((btn) => {
-                    btn.classList.remove('bg-lime-400', 'border-lime-400', 'text-gray-900');
-
-                    btn.classList.add('bg-white', 'border-gray-200');
-                });
-
-                this.classList.remove('bg-white', 'border-gray-200');
-
-                this.classList.add('bg-lime-400', 'border-lime-400', 'text-gray-900');
-
-                updateVariant();
-            });
-        });
-
-        {{-- Initial selected color --}}
-        document.querySelectorAll('.color-btn').forEach((button) => {
-            if (button.dataset.color === window.productData.selectedColor) {
-                button.classList.remove('bg-white', 'border-gray-200');
-
-                button.classList.add('bg-lime-400', 'border-lime-400', 'text-gray-900');
-            }
-        });
-    </script>
-
-    {{-- =============================================================
-        IMAGE GALLERY
-    ============================================================== --}}
-    <script>
-        const previewImage = document.getElementById('detailPreviewImage');
-
-        const thumbnails = document.querySelectorAll('.detail-thumb-btn');
-
-        const thumbnailContainer = document.getElementById('detailThumbnailContainer');
-
-        let currentImageIndex = 0;
-
-        function setActiveThumbnail(index) {
-            thumbnails.forEach((thumb, i) => {
-                thumb.classList.remove('border-lime-400');
-
-                thumb.classList.add('border-transparent');
-
-                if (i === index) {
-                    thumb.classList.remove('border-transparent');
-
-                    thumb.classList.add('border-lime-400');
-                }
-            });
-        }
-
-        thumbnails.forEach((thumbnail, index) => {
-            thumbnail.addEventListener('click', function () {
-                previewImage.src = this.dataset.src;
-
-                currentImageIndex = index;
-
-                setActiveThumbnail(index);
-            });
-        });
-
-        document.getElementById('detailPrevBtn').addEventListener('click', () => {
-            if (!thumbnails.length) return;
-
-            currentImageIndex = (currentImageIndex - 1 + thumbnails.length) % thumbnails.length;
-
-            previewImage.src = thumbnails[currentImageIndex].dataset.src;
-
-            setActiveThumbnail(currentImageIndex);
-        });
-
-        document.getElementById('detailNextBtn').addEventListener('click', () => {
-            if (!thumbnails.length) return;
-
-            currentImageIndex = (currentImageIndex + 1) % thumbnails.length;
-
-            previewImage.src = thumbnails[currentImageIndex].dataset.src;
-
-            setActiveThumbnail(currentImageIndex);
-        });
-
-        document.getElementById('detailThumbPrev').addEventListener('click', () => {
-            thumbnailContainer.scrollBy({
-                left: -250,
-                behavior: 'smooth',
-            });
-        });
-
-        document.getElementById('detailThumbNext').addEventListener('click', () => {
-            thumbnailContainer.scrollBy({
-                left: 250,
-                behavior: 'smooth',
-            });
-        });
-
-        setActiveThumbnail(0);
-    </script>
-
-    {{-- =============================================================
-        ADD TO CART
-    ============================================================== --}}
-    <script>
-        const isLoggedIn = @json (Auth::check());
-
-        addToCartBtn.addEventListener('click', async () => {
-            {{-- Guest --}}
-            if (!isLoggedIn) {
-                Swal.fire({
-                    icon: 'warning',
-
-                    title: 'Login Required',
-
-                    text: 'Please login before adding products to your cart.',
-
-                    confirmButtonText: 'Login',
-
-                    showCancelButton: true,
-
-                    cancelButtonText: 'Cancel',
-
-                    confirmButtonColor: '#a3e635',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = '{{ route('user#loginRedirect') }}';
-                    }
-                });
-
-                return;
-            }
-
-            const capacity = window.productData.selectedCapacity;
-
-            const color = window.productData.selectedColor;
-
-            const variant = window.productData.variants.find((item) => item.capacity === capacity && item.color === color);
-
-            {{-- Invalid variant --}}
-            if (!variant) {
-                showCartAlert('warning', 'Please select a valid variant.');
-
-                return;
-            }
-
-            const quantity = Number(document.getElementById('quantity').value);
-
-            {{-- Invalid quantity --}}
-            if (quantity <= 0) {
-                showCartAlert('warning', 'Invalid quantity.');
-
-                return;
-            }
-
-            {{-- Stock --}}
-            if (quantity > variant.stock) {
-                showCartAlert('error', 'Not enough stock.');
-
-                return;
-            }
-
-            try {
-                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-                const response = await fetch('{{ route('user#addToCart') }}', {
-                    method: 'POST',
-
-                    headers: {
-                        'Content-Type': 'application/json',
-
-                        Accept: 'application/json',
-
-                        'X-CSRF-TOKEN': csrfToken,
-                    },
-
-                    body: JSON.stringify({
-                        variant_id: variant.id,
-
-                        quantity: quantity,
-                    }),
-                });
-
-                {{-- Session expired --}}
-                if (response.status === 419) {
-                    showCartAlert('warning', 'Your session expired. Please refresh the page.');
-
-                    return;
-                }
-
-                {{-- Validation error --}}
-                if (response.status === 422) {
-                    const data = await response.json();
-
-                    console.error('Validation response:', data);
-
-                    showCartAlert('error', data.message ?? 'Unable to add this item to your cart.');
-
-                    return;
-                }
-
-                {{-- Server error --}}
-                if (!response.ok) {
-                    console.error('Server error:', response.status, await response.text());
-
-                    showCartAlert('error', 'Unable to add this item to your cart.');
-
-                    return;
-                }
-
-                const data = await response.json();
-
-                {{-- Success --}}
-                if (data.success) {
-                    showCartAlert('success', 'Added item to your cart');
-
-                    const cartCount = document.getElementById('cartCount');
-
-                    if (cartCount) {
-                        cartCount.textContent = data.cartCount;
-
-                        if (data.cartCount > 0) {
-                            cartCount.classList.remove('hidden');
-
-                            cartCount.classList.add('flex');
-                        } else {
-                            cartCount.classList.add('hidden');
-
-                            cartCount.classList.remove('flex');
-                        }
-                    }
-                } else {
-                    console.error('Cart error:', data);
-
-                    showCartAlert('error', 'Unable to add this item to your cart.');
-                }
-            } catch (error) {
-                console.error('Add to cart error:', error);
-
-                showCartAlert('error', 'Unable to add this item to your cart.');
-            }
-        });
+        window.cartConfig = {
+            isLoggedIn: @json (Auth::check()),
+            addToCartUrl: @json (route('user#addToCart')),
+            loginUrl: @json (route('user#loginRedirect')),
+        };
     </script>
 
     {{-- =============================================================
@@ -1149,7 +691,6 @@
                 });
             });
         </script>
-
     @endif
 
     {{-- =============================================================
@@ -1169,7 +710,6 @@
                 });
             });
         </script>
-
     @endif
 
     {{-- Small scrollbar utility --}}
