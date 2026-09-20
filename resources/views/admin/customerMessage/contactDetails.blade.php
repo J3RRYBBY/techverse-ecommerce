@@ -6,14 +6,14 @@
         <div class="flex flex-col justify-between max-w-5xl gap-4 mb-6 sm:flex-row sm:items-center">
             <div class="flex items-center gap-4">
                 <a
-                    href="{{ route('admin#customerContact') }}"
+                    href="{{ route('admin#customerMessages') }}"
                     class="flex items-center justify-center w-10 h-10 text-gray-600 transition bg-white border border-gray-200 rounded-lg hover:bg-gray-100"
                 >
                     <i class="text-sm fa-solid fa-arrow-left"></i>
                 </a>
 
                 <div>
-                    <h1 class="text-2xl font-medium text-gray-800">Contact Message</h1>
+                    <h1 class="text-2xl font-medium text-gray-800">Customer Message</h1>
 
                     <p class="text-sm text-black/60">View customer message details</p>
                 </div>

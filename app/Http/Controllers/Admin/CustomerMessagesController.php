@@ -5,18 +5,18 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 
-class CustomerContactController extends Controller
+class CustomerMessagesController extends Controller
 {
     // Contact list
-    public function CustomerContact()
+    public function CustomerMessages()
     {
         $contacts = Contact::latest()->paginate(10);
 
-        return view('admin.customerContact.customerContact', compact('contacts'));
+        return view('admin.customerMessage.customerMessage', compact('contacts'));
     }
 
     // View contact
-    public function contactDetails(int $id)
+    public function messageDetails(int $id)
     {
         $contact = Contact::findOrFail($id);
 
@@ -27,7 +27,7 @@ class CustomerContactController extends Controller
             ]);
         }
 
-        return view('admin.customerContact.contactDetails', compact('contact'));
+        return view('admin.customerMessage.contactDetails', compact('contact'));
     }
 
     // Delete contact
@@ -37,6 +37,6 @@ class CustomerContactController extends Controller
 
         $contact->delete();
 
-        return redirect()->route('admin#contact')->with('deleteSuccess', 'Contact deleted successfully!');
+        return redirect()->route('admin#customerMessage')->with('deleteSuccess', 'Contact deleted successfully!');
     }
 }

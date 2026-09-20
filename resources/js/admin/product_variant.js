@@ -1,6 +1,6 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const container = document.getElementById("variants-container");
-    const addButton = document.getElementById("addVariant");
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('variants-container');
+    const addButton = document.getElementById('addVariant');
 
     if (!container) {
         return;
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         <!-- Upload Button -->
                         <label
-                            class="flex items-center justify-center flex-shrink-0 w-20 h-20 border-2 border-dashed rounded-lg cursor-pointer upload-box"
+                            class="flex items-center justify-center flex-shrink-0 w-20 h-20 border-2 rounded-lg cursor-pointer upload-box"
                         >
                             <i class="text-xl text-black/70 fa-solid fa-plus"></i>
 
@@ -166,31 +166,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Add Variant
     if (addButton) {
-        addButton.addEventListener("click", () => {
-            const index = container.querySelectorAll(".variant-row").length;
+        addButton.addEventListener('click', () => {
+            const index = container.querySelectorAll('.variant-row').length;
 
-            container.insertAdjacentHTML("beforeend", createVariant(index));
+            container.insertAdjacentHTML('beforeend', createVariant(index));
 
             updateVariantNumbers();
         });
     }
 
     // Remove Variant
-    container.addEventListener("click", (event) => {
-        const removeButton = event.target.closest(".remove-variant");
+    container.addEventListener('click', (event) => {
+        const removeButton = event.target.closest('.remove-variant');
 
         if (!removeButton) {
             return;
         }
 
-        const rows = container.querySelectorAll(".variant-row");
+        const rows = container.querySelectorAll('.variant-row');
 
         // Don't allow zero variants
         if (rows.length === 1) {
             return;
         }
 
-        const row = removeButton.closest(".variant-row");
+        const row = removeButton.closest('.variant-row');
 
         if (row) {
             row.remove();
@@ -201,18 +201,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Update Variant Numbers + Input Names
     function updateVariantNumbers() {
-        const rows = container.querySelectorAll(".variant-row");
+        const rows = container.querySelectorAll('.variant-row');
 
         rows.forEach((row, index) => {
             // Update number
-            const number = row.querySelector(".variant-number");
+            const number = row.querySelector('.variant-number');
 
             if (number) {
                 number.textContent = index + 1;
             }
 
             // Update title
-            const title = row.querySelector(".variant-title");
+            const title = row.querySelector('.variant-title');
 
             if (title) {
                 title.textContent = `Variant ${index + 1}`;
@@ -247,7 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             // Update image input name
-            const imageInput = row.querySelector("input.image-input");
+            const imageInput = row.querySelector('input.image-input');
 
             if (imageInput) {
                 imageInput.name = `variants[${index}][images][]`;

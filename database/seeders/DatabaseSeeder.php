@@ -24,22 +24,22 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        User::firstOrCreate(
-            ['email' => env('SUPERADMIN_EMAIL')],
-            [
-                'name' => env('SUPERADMIN_NAME'),
-                'password' => Hash::make(env('SUPERADMIN_PASSWORD')),
-                'role' => 'superadmin',
-            ],
-        );
-
-        // User::updateOrCreate(
-        //     ['email' => 'superadmin@techverse.com'],
+        // User::firstOrCreate(
+        //     ['email' => env('SUPERADMIN_EMAIL')],
         //     [
-        //         'name' => 'Super Admin',
-        //         'password' => Hash::make('12345678'),
+        //         'name' => env('SUPERADMIN_NAME'),
+        //         'password' => Hash::make(env('SUPERADMIN_PASSWORD')),
         //         'role' => 'superadmin',
         //     ],
         // );
+
+        User::firstOrCreate(
+            ['email' => 'superadmin@gmail.com'],
+            [
+                'name' => 'Super Admin',
+                'password' => Hash::make('12345678'),
+                'role' => 'superadmin',
+            ],
+        );
     }
 }

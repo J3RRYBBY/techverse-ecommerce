@@ -21,7 +21,7 @@
             {{-- side bar --}}
             <aside
                 id="sidebar"
-                class="fixed top-0 left-0 z-30 flex flex-col justify-between h-screen text-black transition-all duration-300 ease-in-out bg-white border-r w-60"
+                class="fixed top-0 left-0 z-30 flex flex-col justify-between w-64 h-screen text-black transition-all duration-300 ease-in-out bg-white border-r"
             >
                 <div>
                     <div class="flex items-center justify-between h-16 px-4 py-6">
@@ -35,54 +35,88 @@
                     </div>
 
                     <nav class="px-3 pt-4 space-y-2 text-sm">
+                        {{-- Dashboard --}}
                         <a
                             href="{{ route('admin#dashboard') }}"
-                            class="flex items-center px-6 py-3 space-x-4 transition-colors rounded-lg text-black/70"
+                            class="flex items-center px-6 py-3 space-x-4 rounded-lg
+                                    {{ request()->routeIs('admin#dashboard')
+                                        ? 'bg-lime-400'
+                                        : 'text-black/70 hover:bg-gray-100' }}"
                         >
                             <x-heroicon-o-home class="w-6 h-6" />
                             <span class="truncate sidebar-text">Dashboard</span>
                         </a>
+
+                        {{-- Categories --}}
                         <a
                             href="{{ route('category#list') }}"
-                            class="flex items-center px-6 py-3 space-x-4 transition-colors rounded-lg text-black/70"
+                            class="flex items-center px-6 py-3 space-x-4 rounded-lg
+                                    {{ request()->routeIs('category#list')
+                                        ? 'bg-lime-400'
+                                        : 'text-black/70 hover:bg-gray-100' }}"
                         >
                             <x-heroicon-o-squares-2x2 class="w-6 h-6" />
-                            <span class="truncate sidebar-text">Categotries</span>
+                            <span class="truncate sidebar-text">Categories</span>
                         </a>
+
+                        {{-- Products --}}
                         <a
                             href="{{ route('product#list') }}"
-                            class="flex items-center px-6 py-3 space-x-4 transition-colors rounded-lg text-black/70"
+                            class="flex items-center px-6 py-3 space-x-4 rounded-lg
+                                    {{ request()->routeIs('product#list')
+                                        ? 'bg-lime-400'
+                                        : 'text-black/70 hover:bg-gray-100' }}"
                         >
                             <x-heroicon-o-shopping-bag class="w-6 h-6" />
                             <span class="truncate sidebar-text">Products List</span>
                         </a>
+
+                        {{-- Payment --}}
                         <a
                             href="{{ route('admin#payment') }}"
-                            class="flex items-center px-6 py-3 space-x-4 transition-colors rounded-lg text-black/70"
+                            class="flex items-center px-6 py-3 space-x-4 rounded-lg
+                                {{ request()->routeIs('admin#payment')
+                                    ? 'bg-lime-400'
+                                    : 'text-black/70 hover:bg-gray-100' }}"
                         >
                             <x-heroicon-o-credit-card class="w-6 h-6" />
                             <span class="truncate sidebar-text">Payment Method</span>
                         </a>
+
+                        {{-- Sales Information --}}
                         <a
                             href="{{ route('admin#salesInfo') }}"
-                            class="flex items-center px-6 py-3 space-x-4 transition-colors rounded-lg text-black/70"
+                            class="flex items-center px-6 py-3 space-x-4 rounded-lg
+                                {{ request()->routeIs('admin#salesInfo')
+                                    ? 'bg-lime-400'
+                                    : 'text-black/70 hover:bg-gray-100' }}"
                         >
                             <x-heroicon-o-chart-bar class="w-6 h-6" />
                             <span class="truncate sidebar-text">Sales Information</span>
                         </a>
+
+                        {{-- Order Board --}}
                         <a
                             href="{{ route('admin#orderBoard') }}"
-                            class="flex items-center px-6 py-3 space-x-4 transition-colors rounded-lg text-black/70"
+                            class="flex items-center px-6 py-3 space-x-4 rounded-lg
+                                {{ request()->routeIs('admin#orderBoard')
+                                    ? 'bg-lime-400'
+                                    : 'text-black/70 hover:bg-gray-100' }}"
                         >
                             <x-heroicon-o-clipboard-document-list class="w-6 h-6" />
                             <span class="truncate sidebar-text">Order Board</span>
                         </a>
+
+                        {{-- Customer Messages --}}
                         <a
-                            href="{{ route('admin#customerContact') }}"
-                            class="flex items-center px-6 py-3 space-x-4 transition-colors rounded-lg text-black/70"
+                            href="{{ route('admin#customerMessages') }}"
+                            class="flex items-center px-6 py-3 space-x-4 rounded-lg
+                                {{ request()->routeIs('admin#customerMessages')
+                                    ? 'bg-lime-400'
+                                    : 'text-black/70 hover:bg-gray-100' }}"
                         >
                             <x-heroicon-o-user class="w-6 h-6" />
-                            <span class="truncate sidebar-text">Customer Contact</span>
+                            <span class="truncate sidebar-text">Customer Messages</span>
                         </a>
                     </nav>
                 </div>
@@ -90,7 +124,7 @@
             {{-- sidebar end --}}
 
             {{-- navbar --}}
-            <main id="main-content" class="flex flex-col min-h-screen transition-all duration-300 ease-in-out ml-60">
+            <main id="main-content" class="flex flex-col min-h-screen ml-64 transition-all duration-300 ease-in-out">
                 <header class="z-20 flex items-center justify-end h-16 px-10 py-6 bg-white border-b">
                     @if (Auth::check())
                         <el-dropdown class="flex items-center">

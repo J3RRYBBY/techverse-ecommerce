@@ -4,7 +4,7 @@
     <div class="px-10 py-7">
         {{-- Header --}}
         <div class="pb-3">
-            <h1 class="text-2xl font-medium text-gray-800">Contact Messages</h1>
+            <h1 class="text-2xl font-medium text-gray-800">Customer Messages</h1>
 
             <p class="text-sm text-black/60">View messages sent by customers.</p>
         </div>
@@ -74,7 +74,7 @@
                                     <div class="flex items-center gap-2">
                                         {{-- View --}}
                                         <a
-                                            href="{{ route('admin#contactDetails', $contact->id) }}"
+                                            href="{{ route('admin#messageDetails', $contact->id) }}"
                                             class="inline-flex items-center justify-center text-blue-600 transition bg-blue-100 rounded-lg w-9 h-9 hover:bg-blue-200"
                                         >
                                             <x-heroicon-o-eye class="w-5 h-5" />

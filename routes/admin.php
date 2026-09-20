@@ -1,10 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminDashboardController;
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminManagementController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\CustomerContactController;
+use App\Http\Controllers\Admin\CustomerMessagesController;
 use App\Http\Controllers\Admin\OrderManagementController;
 use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\ProductController;
@@ -35,8 +34,6 @@ Route::middleware(['auth', 'superAdminMiddleware'])
 Route::middleware(['auth', 'adminMiddleware'])
     ->prefix('admin')
     ->group(function () {
-        // Route::get('/', [DashboardController::class, 'dashboard'])->name('admin#home');
-
         Route::get('/admin/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admin#dashboard');
 
         Route::get('/admin/sales', [SalesInfoController::class, 'salesInfo'])->name('admin#salesInfo');
@@ -113,17 +110,16 @@ Route::middleware(['auth', 'adminMiddleware'])
         );
 
         // contact
-        Route::get('/admin/customerContact', [CustomerContactController::class, 'customerContact'])->name(
-            'admin#customerContact',
+        Route::get('/admin/customerMessages', [CustomerMessagesController::class, 'customerMessages'])->name(
+            'admin#customerMessages',
         );
 
-        Route::get('/admin/customerContact/contactDetails/{id}', [
-            CustomerContactController::class,
-            'contactDetails',
-        ])->name('admin#contactDetails');
+        Route::get('/admin/customerMessages/Details/{id}', [CustomerMessagesController::class, 'messageDetails'])->name(
+            'admin#messageDetails',
+        );
 
         Route::delete('/admin/deleteCustomerMessage/{id}', [
-            CustomerContactController::class,
+            CustomerMessagesController::class,
             'deleteCustomerMessage',
         ])->name('admin#deleteCustomerMessage');
     });
