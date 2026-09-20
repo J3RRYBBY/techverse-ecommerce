@@ -2,17 +2,24 @@
 
 @section ('content')
     <div class="px-10 py-7">
-        {{-- Back --}}
-        <a
+        {{-- <a
             href="{{ route('admin#orderBoard') }}"
             class="inline-flex items-center gap-2 mb-3 text-sm text-gray-500 hover:text-gray-900"
         >
             <i class="fa-solid fa-arrow-left"></i>
             Back to Orders
-        </a>
+        </a> --}}
 
         {{-- Header --}}
-        <div class="flex items-start gap-5 mb-8">
+        <div class="flex items-start gap-4 mb-8">
+            {{-- Back --}}
+            <a
+                href="{{ route('admin#orderBoard') }}"
+                class="flex items-center justify-center w-10 h-10 text-gray-600 transition bg-white border border-gray-200 rounded-lg hover:bg-gray-100"
+            >
+                <i class="text-sm fa-solid fa-arrow-left"></i>
+            </a>
+
             <div>
                 <h1 class="text-2xl font-medium">Order - {{ $order->order_number ?? $order->id }}</h1>
 

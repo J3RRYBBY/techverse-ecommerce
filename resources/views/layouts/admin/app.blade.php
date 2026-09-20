@@ -5,22 +5,30 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>E-commerce</title>
 
+        <script>
+            if (localStorage.getItem('sidebarCollapsed') === 'true') {
+                document.documentElement.classList.add('sidebar-collapsed');
+            }
+
+            document.documentElement.classList.add('sidebar-loading');
+        </script>
+
         @vite (['resources/css/app.css', 'resources/js/app.js'])
     </head>
 
     <body class="font-inter">
-        <div class="flex min-h-screen overflow-hidden">
+        <div class="min-h-screen">
             {{-- side bar --}}
             <aside
                 id="sidebar"
-                class="flex flex-col justify-between text-black transition-all duration-300 ease-in-out border-r w-60"
+                class="fixed top-0 left-0 z-30 flex flex-col justify-between h-screen text-black transition-all duration-300 ease-in-out bg-white border-r w-60"
             >
                 <div>
                     <div class="flex items-center justify-between h-16 px-4 py-6">
-                        <a href="" class="pl-4 text-2xl truncate sidebar-text font-gugi"
+                        <a href="{{ route('admin#dashboard') }}" class="pl-4 text-2xl truncate sidebar-text font-gugi"
                             >tech<span class="font-bold text-lime-400">V</span>erse</a
                         >
-                        <button id="toggle-btn" class="p-5 cursor-pointer">
+                        <button id="toggle-btn" type="button" class="p-5 cursor-pointer">
                             <x-lucide-sidebar-close id="toggle-close-icon" class="w-5 h-5" />
                             <x-lucide-sidebar-open id="toggle-open-icon" class="hidden w-5 h-5" />
                         </button>
@@ -28,7 +36,7 @@
 
                     <nav class="px-3 pt-4 space-y-2 text-sm">
                         <a
-                            href="#"
+                            href="{{ route('admin#dashboard') }}"
                             class="flex items-center px-6 py-3 space-x-4 transition-colors rounded-lg text-black/70"
                         >
                             <x-heroicon-o-home class="w-6 h-6" />
@@ -56,11 +64,11 @@
                             <span class="truncate sidebar-text">Payment Method</span>
                         </a>
                         <a
-                            href="#"
+                            href="{{ route('admin#salesInfo') }}"
                             class="flex items-center px-6 py-3 space-x-4 transition-colors rounded-lg text-black/70"
                         >
                             <x-heroicon-o-chart-bar class="w-6 h-6" />
-                            <span class="truncate sidebar-text">Sale Information</span>
+                            <span class="truncate sidebar-text">Sales Information</span>
                         </a>
                         <a
                             href="{{ route('admin#orderBoard') }}"
@@ -82,8 +90,8 @@
             {{-- sidebar end --}}
 
             {{-- navbar --}}
-            <main class="flex flex-col flex-1 min-w-0">
-                <header class="z-10 flex items-center justify-end h-16 px-10 py-6 border-b">
+            <main id="main-content" class="flex flex-col min-h-screen transition-all duration-300 ease-in-out ml-60">
+                <header class="z-20 flex items-center justify-end h-16 px-10 py-6 bg-white border-b">
                     @if (Auth::check())
                         <el-dropdown class="flex items-center">
                             <button class="flex items-center">
@@ -148,6 +156,12 @@
     </body>
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
+
+    <script>
+        requestAnimationFrame(() => {
+            document.documentElement.classList.remove('sidebar-loading');
+        });
+    </script>
 
     @yield ('script-code')
 </html>

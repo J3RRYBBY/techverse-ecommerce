@@ -15,7 +15,7 @@
                         <h2 class="text-lg">Shipping Information</h2>
 
                         <div class="mt-5">
-                            <label class="block text-sm text-black/50"> Name </label>
+                            <label class="block text-sm text-black/50">Name</label>
 
                             <input
                                 type="text"
@@ -28,7 +28,7 @@
 
                         <div class="flex flex-col items-center justify-between gap-0 sm:flex-row sm:gap-5">
                             <div class="w-full mt-5">
-                                <label class="block text-sm text-black/50"> Email </label>
+                                <label class="block text-sm text-black/50">Email</label>
 
                                 <input
                                     type="email"
@@ -40,11 +40,12 @@
                             </div>
 
                             <div class="w-full mt-5">
-                                <label class="block text-sm text-black/50"> Phone </label>
+                                <label class="block text-sm text-black/50">Phone</label>
 
                                 <input
                                     type="text"
                                     name="phone"
+                                    value="{{ old('phone') }}"
                                     class="w-full px-4 mt-2 border py-2.5 text-sm rounded-lg shadow-sm focus:outline-none focus:border-lime-400 focus:ring-1 focus:ring-lime-400"
                                     required
                                 />
@@ -53,22 +54,24 @@
 
                         <div class="flex flex-col items-center justify-between gap-0 sm:flex-row sm:gap-5">
                             <div class="w-full mt-5 sm:w-2/3">
-                                <label class="block text-sm text-black/50"> Address </label>
+                                <label class="block text-sm text-black/50">Address</label>
 
                                 <input
                                     type="text"
                                     name="address"
+                                    value="{{ old('address') }}"
                                     class="w-full px-4 mt-2 border py-2.5 text-sm rounded-lg shadow-sm focus:outline-none focus:border-lime-400 focus:ring-1 focus:ring-lime-400"
                                     required
                                 />
                             </div>
 
                             <div class="w-full mt-5 sm:w-1/3">
-                                <label class="block text-sm text-black/50"> City </label>
+                                <label class="block text-sm text-black/50">City</label>
 
                                 <input
                                     type="text"
                                     name="city"
+                                    value="{{ old('city') }}"
                                     class="w-full px-4 mt-2 border py-2.5 text-sm rounded-lg shadow-sm focus:outline-none focus:border-lime-400 focus:ring-1 focus:ring-lime-400"
                                     required
                                 />
@@ -93,7 +96,6 @@
                                         name="payment_method_id"
                                         value="{{ $paymentMethod->id }}"
                                         class="hidden"
-                                        required
                                     />
 
                                     <div
@@ -153,7 +155,6 @@
                                     name="payment_receipt"
                                     id="payment_receipt"
                                     accept="image/jpeg,image/png,image/webp,image/avif"
-                                    required
                                     class="hidden"
                                 />
 
@@ -192,7 +193,11 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="w-full py-3 mt-6 text-sm font-medium rounded bg-lime-400">
+                    <button
+                        type="submit"
+                        id="place-order-btn"
+                        class="w-full py-3 mt-6 text-sm font-medium rounded bg-lime-400"
+                    >
                         Place Order
                     </button>
                 </form>
@@ -337,6 +342,25 @@
 
             receiptPreview.classList.add('hidden');
             receiptUpload.classList.remove('hidden');
+        });
+    </script>
+
+    <script>
+        // Place Order validation
+        const checkoutForm = document.querySelector('form[action="{{ route('user#placeOrder') }}"]');
+        checkoutForm.addEventListener('submit', function (event) {
+            const selectedPayment = document.querySelector('input[name="payment_method_id"]:checked');
+            if (!selectedPayment) {
+                event.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Payment Method Required',
+                    text: 'Please choose a payment method before placing your order.',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#a3e635',
+                });
+                return;
+            }
         });
     </script>
 

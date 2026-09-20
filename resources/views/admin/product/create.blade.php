@@ -4,8 +4,17 @@
     <div class="px-10 py-7">
         <form action="{{ route('product#create') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="pb-3">
-                <h1 class="text-2xl font-medium text-gray-800">Add New Product</h1>
+            <div class="flex items-center gap-4 pb-3">
+                {{-- Back --}}
+                <a
+                    href="{{ route('product#list') }}"
+                    class="flex items-center justify-center w-10 h-10 text-gray-600 transition bg-white border border-gray-200 rounded-lg hover:bg-gray-100"
+                >
+                    <i class="text-sm fa-solid fa-arrow-left"></i>
+                </a>
+                <div class="">
+                    <h1 class="text-2xl font-medium text-gray-800">Add New Product</h1>
+                </div>
             </div>
 
             <div class="flex justify-between gap-7">

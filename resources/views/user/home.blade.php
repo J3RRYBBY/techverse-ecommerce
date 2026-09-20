@@ -83,7 +83,7 @@
                                 <div class="flex items-center justify-center">
                                     @if ($image)
                                         <img
-                                            src="{{ asset('productImage/' . $image->image) }}"
+                                            src="{{ $image->image }}"
                                             alt="{{ $product->name }}"
                                             class="object-cover w-full rounded-t-lg aspect-square"
                                         />

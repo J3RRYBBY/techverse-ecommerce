@@ -2,10 +2,19 @@
 
 @section ('content')
     <div class="px-10 py-7">
-        <div class="pb-3">
-            <h1 class="text-2xl font-medium text-gray-800">Edit Payment Method</h1>
+        <div class="flex items-center gap-4 pb-3">
+            {{-- Back --}}
+            <a
+                href="{{ route('admin#payment') }}"
+                class="flex items-center justify-center w-10 h-10 text-gray-600 transition bg-white border border-gray-200 rounded-lg hover:bg-gray-100"
+            >
+                <i class="text-sm fa-solid fa-arrow-left"></i>
+            </a>
+            <div class="">
+                <h1 class="text-2xl font-medium text-gray-800">Edit Payment Method</h1>
 
-            <p class="text-sm text-black/60">Update payment information.</p>
+                <p class="text-sm text-black/60">Update payment information.</p>
+            </div>
         </div>
 
         @if ($errors->any())

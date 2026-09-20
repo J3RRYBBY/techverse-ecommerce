@@ -66,7 +66,7 @@
                             $image = $variant?->images?->first();
                         @endphp
 
-                        <div class="flex flex-col gap-4 py-6 pr-0 sm:flex-row sm:items-start sm:gap-5 sm:pr-6">
+                        <div class="flex flex-col gap-4 pb-6 pr-0 sm:flex-row sm:items-start sm:gap-5 sm:pr-6">
                             {{-- Image --}}
                             <div
                                 class="flex items-center justify-center flex-shrink-0 w-24 h-24 overflow-hidden bg-gray-100 sm:w-28 sm:h-28 rounded-xl"

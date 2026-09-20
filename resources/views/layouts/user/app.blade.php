@@ -13,7 +13,7 @@
     <body class="flex flex-col min-h-screen font-inter">
         <main class="flex-1">
             <!-- Navbar -->
-            <nav class="relative z-50 py-3">
+            <nav class="sticky top-0 z-50 py-3 bg-white/20 backdrop-blur-lg">
                 <div class="w-[90%] sm:w-[85%] lg:w-[70%] mx-auto">
                     @php
                         $cartCount = auth()->check() ? auth()->user()->carts()->sum('quantity') : 0;
@@ -113,10 +113,7 @@
                     </div>
 
                     <!-- Mobile Menu -->
-                    <div
-                        id="mobileMenu"
-                        class="absolute left-0 z-50 hidden w-full mt-4 border border-t shadow-xl bg-white/65 border-white/20 backdrop-blur-xl lg:hidden"
-                    >
+                    <div id="mobileMenu" class="absolute left-0 z-50 hidden w-full mt-4 bg-white border lg:hidden">
                         <div class="flex flex-col px-3 py-3">
                             <a href="{{ route('user#home') }}" class="px-3 py-3 transition hover:bg-gray-100"> Home </a>
 
@@ -143,30 +140,30 @@
                             @endif
                         </div>
                     </div>
-
-                    <!-- Cart Drawer -->
-                    <div>
-                        <div id="cartOverlay" class="fixed inset-0 z-40 hidden bg-black/40"></div>
-
-                        <div
-                            id="cartDrawer"
-                            class="fixed top-0 right-0 z-50 flex flex-col w-full h-full max-w-[400px] translate-x-full bg-white transition-transform duration-300"
-                        >
-                            <div class="flex items-center justify-between p-5 border-b">
-                                <h2 class="text-lg font-medium">Shopping Cart</h2>
-
-                                <button id="closeCart" type="button">✕</button>
-                            </div>
-
-                            <div id="cartItems" class="flex-1 p-5 overflow-y-auto">
-                                <!-- Cart items will go here -->
-                            </div>
-
-                            <div id="cartFooter" class="p-5 border-t"></div>
-                        </div>
-                    </div>
                 </div>
             </nav>
+
+            <!-- Cart Drawer -->
+            <div>
+                <div id="cartOverlay" class="fixed inset-0 hidden z-[60] bg-black/40"></div>
+
+                <div
+                    id="cartDrawer"
+                    class="fixed top-0 right-0 z-[70] flex flex-col w-full h-full max-w-[400px] translate-x-full bg-white transition-transform duration-300"
+                >
+                    <div class="flex items-center justify-between p-5 border-b">
+                        <h2 class="text-lg font-medium">Shopping Cart</h2>
+
+                        <button id="closeCart" type="button">✕</button>
+                    </div>
+
+                    <div id="cartItems" class="flex-1 p-5 overflow-y-auto">
+                        <!-- Cart items will go here -->
+                    </div>
+
+                    <div id="cartFooter" class="p-5 border-t"></div>
+                </div>
+            </div>
 
             @yield ('content')
         </main>
@@ -189,7 +186,7 @@
                         <!-- Categories + Quick Links -->
                         <div class="grid grid-cols-2 gap-6 sm:flex sm:justify-around">
                             <!-- Category -->
-                            <div>
+                            <div class="pl-3 sm:pl-0">
                                 <h3 class="text-xl">Category</h3>
 
                                 <ul class="mt-3 text-sm text-white/50">
@@ -207,7 +204,7 @@
                             </div>
 
                             <!-- Quick Links -->
-                            <div>
+                            <div class="pl-3 sm:pl-0">
                                 <h3 class="text-xl">Quick Links</h3>
 
                                 <ul class="mt-3 text-sm text-white/50">
