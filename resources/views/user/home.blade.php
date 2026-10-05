@@ -13,7 +13,7 @@
                 </a>
             </div>
 
-            <div class="flex gap-3 mb-5 overflow-x-auto text-sm sm:gap-4 lg:gap-5 scrollbar-hide">
+            <div class="grid grid-cols-2 gap-3 mb-5 sm:grid-cols-4 sm:gap-4 lg:gap-5">
                 @forelse ($categories as $category)
                     <a href="{{ route('user#productList', ['category' => $category->id]) }}" class="flex-shrink-0">
                         <div
@@ -31,7 +31,9 @@
                     </a>
                 @empty
                     {{-- No Featured Categories Yet --}}
-                    <div class="w-full py-12 text-center border border-gray-100 rounded-xl sm:py-16 bg-gray-50">
+                    <div
+                        class="col-span-2 py-12 text-center border border-gray-100 rounded-xl sm:col-span-4 sm:py-16 bg-gray-50"
+                    >
                         <i class="text-3xl text-gray-300 sm:text-4xl fa-solid fa-layer-group"></i>
 
                         <h3 class="mt-4 text-base font-medium text-gray-700 sm:text-lg">No featured categories yet</h3>

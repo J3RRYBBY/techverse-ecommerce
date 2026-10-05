@@ -27,13 +27,57 @@
                         </a>
 
                         <!-- Desktop Navigation -->
-                        <div class="items-center hidden gap-10 lg:flex">
-                            <a href="{{ route('user#home') }}">Home</a>
-                            <a href="{{ route('user#productList') }}">Product</a>
-                            <a href="{{ route('user#category') }}">Category</a>
-                            <a href="{{ route('user#myOrder') }}">My Order</a>
-                            <a href="{{ route('user#contact') }}">Contact</a>
+                        <div id="navbar" class="items-center hidden gap-10 lg:flex">
+                            <a
+                                href="{{ route('user#home') }}"
+                                class="nav-link hover:underline hover:underline-offset-8 hover:decoration-lime-400 hover:decoration-2"
+                            >
+                                Home
+                            </a>
+
+                            <a
+                                href="{{ route('user#productList') }}"
+                                class="nav-link hover:underline hover:underline-offset-8 hover:decoration-lime-400 hover:decoration-2"
+                            >
+                                Product
+                            </a>
+
+                            <a
+                                href="{{ route('user#category') }}"
+                                class="nav-link hover:underline hover:underline-offset-8 hover:decoration-lime-400 hover:decoration-2"
+                            >
+                                Category
+                            </a>
+
+                            <a
+                                href="{{ route('user#myOrder') }}"
+                                class="nav-link hover:underline hover:underline-offset-8 hover:decoration-lime-400 hover:decoration-2"
+                            >
+                                My Order
+                            </a>
+
+                            <a
+                                href="{{ route('user#contact') }}"
+                                class="nav-link hover:underline hover:underline-offset-8 hover:decoration-lime-400 hover:decoration-2"
+                            >
+                                Contact
+                            </a>
                         </div>
+
+                        <script>
+                            const links = document.querySelectorAll('.nav-link');
+
+                            links.forEach((link) => {
+                                if (link.pathname === window.location.pathname) {
+                                    link.classList.add(
+                                        'underline',
+                                        'underline-offset-8',
+                                        'decoration-2',
+                                        'decoration-lime-400',
+                                    );
+                                }
+                            });
+                        </script>
 
                         <!-- Right Side -->
                         <div class="flex items-center gap-3">
