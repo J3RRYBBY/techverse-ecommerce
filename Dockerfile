@@ -96,6 +96,7 @@ COPY docker/nginx.conf /etc/nginx/sites-available/default
 EXPOSE 10000
 
 # Start Laravel
-CMD ["sh", "-c", "php artisan config:clear && php artisan migrate --force && php artisan db:seed --force && php-fpm -D && nginx -g 'daemon off;'"]
+# CMD ["sh", "-c", "php artisan config:clear && php artisan migrate --force && php artisan db:seed --force && php-fpm -D && nginx -g 'daemon off;'"]
+CMD ["sh", "-c", "php artisan config:clear && php-fpm -D && nginx -g 'daemon off;'"]
 
 RUN php -v
