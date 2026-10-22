@@ -1,4 +1,4 @@
-FROM php:8.2-fpm
+FROM php:8.2.35-fpm
 
 WORKDIR /var/www
 
@@ -97,3 +97,5 @@ EXPOSE 10000
 
 # Start Laravel
 CMD ["sh", "-c", "php artisan config:clear && php artisan migrate --force && php artisan db:seed --force && php-fpm -D && nginx -g 'daemon off;'"]
+
+RUN php -v
