@@ -93,4 +93,4 @@ COPY docker/nginx.conf /etc/nginx/sites-available/default
 EXPOSE 10000
 
 # Start services
-CMD ["sh", "-c", "php artisan migrate --force && php-fpm -D && nginx -g 'daemon off;'"]
+CMD ["sh", "-c", "php artisan migrate --force && php artisan db:seed --force && php-fpm -D && nginx -g 'daemon off;'"]
