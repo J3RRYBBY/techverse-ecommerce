@@ -1,9 +1,10 @@
-FROM php:8.2.35-fpm
+
+FROM php:8.4-fpm
 
 WORKDIR /var/www
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
+# System dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
     nginx \
     git \
     unzip \
@@ -21,8 +22,8 @@ RUN docker-php-ext-configure gd \
     --with-freetype \
     --with-jpeg
 
-# Install PHP extensions
-RUN docker-php-ext-install \
+# PHP extensions
+RUN docker-php-ext-install -j"$(nproc)" \
     gd \
     pdo_pgsql \
     pgsql \
@@ -35,31 +36,27 @@ RUN docker-php-ext-install \
 # Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Install Node.js 22
+# Node.js 22
 RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get update \
-    && apt-get install -y nodejs \
+    && apt-get install -y --no-install-recommends nodejs \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy Laravel project
+# Copy application
 COPY . .
 
-# Install PHP dependencies
+# PHP dependencies
 RUN composer install \
     --no-dev \
     --optimize-autoloader \
-    --no-interaction
+    --no-interaction \
+    --prefer-dist
 
-# Install frontend dependencies
+# Frontend dependencies and build
 RUN npm ci --include=optional
-
-# Fix Rollup Linux native dependency
-RUN npm install @rollup/rollup-linux-x64-gnu --save-dev --force
-
-# Build Vite
 RUN npm run build
 
-# Laravel permissions
+# Create required directories
 RUN mkdir -p \
     public/categoryImage \
     public/productImage \
@@ -72,6 +69,7 @@ RUN mkdir -p \
     storage/logs \
     bootstrap/cache
 
+# Permissions
 RUN chown -R www-data:www-data \
     public/categoryImage \
     public/productImage \
@@ -79,9 +77,8 @@ RUN chown -R www-data:www-data \
     public/userProfile \
     public/paymentReceipts \
     storage \
-    bootstrap/cache
-
-RUN chmod -R 775 \
+    bootstrap/cache \
+    && chmod -R 775 \
     public/categoryImage \
     public/productImage \
     public/category_images \
@@ -90,13 +87,10 @@ RUN chmod -R 775 \
     storage \
     bootstrap/cache
 
-# Nginx configuration
+# Nginx
 COPY docker/nginx.conf /etc/nginx/sites-available/default
 
 EXPOSE 10000
 
-# Start Laravel
-# CMD ["sh", "-c", "php artisan config:clear && php artisan migrate --force && php artisan db:seed --force && php-fpm -D && nginx -g 'daemon off;'"]
-CMD ["sh", "-c", "php artisan config:clear && php-fpm -D && nginx -g 'daemon off;'"]
-
-RUN php -v
+# Start services
+CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]

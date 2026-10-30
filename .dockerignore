@@ -1,17 +1,24 @@
+
+# Git
 .git
 .github
+
+# Environment and secrets
 .env
 .env.*
 !.env.example
 
-node_modules
-vendor
+# Dependencies
+/node_modules
+/vendor
 
-.history
+# Laravel temporary files
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
 
-storage/logs/*
-storage/framework/cache/*
-storage/framework/sessions/*
-storage/framework/views/*
-
-docker-compose.yml
+# Local development
+.DS_Store
+Thumbs.db
+npm-debug.log*
